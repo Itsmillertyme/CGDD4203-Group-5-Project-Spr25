@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class PlayerProjectileController : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+public class PlayerProjectileController : MonoBehaviour {
+    [SerializeField] float speed;
+    float initialSpeed;
+
+    private void Awake() {
+
+        Debug.Log(transform.position);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+        transform.Translate(Vector3.forward * (initialSpeed + speed) * Time.deltaTime);
+    }
+
+    public void SetInitialSpeed(float initSpeedIn) {
+        initialSpeed = initSpeedIn;
     }
 }

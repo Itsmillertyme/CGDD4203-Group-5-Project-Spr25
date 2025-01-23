@@ -1000,12 +1000,12 @@ MonoBehaviour:
   - {fileID: 5630201527549435715, guid: 5230cdf87081a7b4e96fa1375a02a765, type: 3}
   - {fileID: 5630201527549435715, guid: c0978fb7b280e1a4db23a768ca6dbb2b, type: 3}
   - {fileID: 5630201527549435715, guid: 38b384e8f53302e4c9f2a7c6cb83e95e, type: 3}
-  classicCamera: 1
   levelWidth: 100
   levelHeight: 56
-  debugMode: 0
+  asteroidNumber: 2
+  classicCamera: 1
   updateDebug: 0
-  triggerDebug: 0
+  wallDebug: 0
 --- !u!1001 &6906597591985937948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1042,6 +1042,10 @@ PrefabInstance:
       propertyPath: inputActionAsset
       value: 
       objectReference: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 751238887151064644, guid: 7622dc4eeb8d40142a553934b0f77a1d, type: 3}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: laserRechargeTime
       value: 0.75
@@ -1316,7 +1320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6472503618482460071, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.79
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6472503618482460071, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_LocalPosition.y

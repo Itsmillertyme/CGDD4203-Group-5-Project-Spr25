@@ -6,18 +6,21 @@ public class GameManager : MonoBehaviour {
     [SerializeField] Transform[] walls;
     [SerializeField] GameObject[] asteroidPrefabs;
     //
+    [Header("Game Settings")]
+    [SerializeField] int levelWidth;
+    [SerializeField] int levelHeight;
+    [SerializeField] int asteroidNumber;
+    [SerializeField] bool classicCamera;
+    [SerializeField] bool updateDebug;
+    [SerializeField] bool wallDebug;
+    //
     Vector2 levelSize = Vector2.zero;
 
-    //**FIELDS**
-    [Header("Game Settings")]
-    public bool classicCamera;
-    public int levelWidth = 100;
-    public int levelHeight = 56;
-    public bool debugMode;
-    public bool updateDebug;
-    public bool triggerDebug;
-    //
+    //**FIELDS**    
     public Vector2 LevelSize { get => levelSize; }
+    public bool ClassicCamera { get => classicCamera; set => classicCamera = value; }
+    public bool UpdateDebug { get => updateDebug; set => updateDebug = value; }
+    public bool WallDebug { get => wallDebug; set => wallDebug = value; }
 
     //**UNITY METHODS**
     private void Awake() {
@@ -30,8 +33,8 @@ public class GameManager : MonoBehaviour {
         walls[2].transform.position = new Vector3(0, 0, -levelHeight / 2f);
         walls[3].transform.position = new Vector3(-levelWidth / 2f, 0, 0);
 
-        //Place random asteroids
-        for (int i = 0; i < 2; i++) {
+        //Place random initial asteroids
+        for (int i = 0; i < asteroidNumber; i++) {
 
             //Setup random position
             Vector3 spawnPosition = new Vector3(Random.Range(-levelWidth / 2f, levelWidth / 2f), 0, Random.Range(-levelHeight / 2f, levelHeight / 2f));
@@ -40,8 +43,25 @@ public class GameManager : MonoBehaviour {
             //Setup random rotation
             Quaternion spawnRotation = Quaternion.Euler(0, Random.Range(0, 359f), 0);
 
+
             //Place Gameobject
-            GameObject asteroid = Instantiate(asteroidPrefabs[asteroidPrefabs.Length - 1], spawnPosition, spawnRotation);
+            CreateAsteroid(spawnPosition, spawnRotation, 3, 5);
+        }
+    }
+
+    public void CreateAsteroid(Vector3 positionIn, Quaternion rotationIn, int asteroidSizeIn, float speedIn) {
+
+        for (int i = 0; i < asteroidPrefabs.Length; i++) {
+            if (asteroidSizeIn - 1 == i) {
+                //Create GameObject
+                GameObject asteroid = Instantiate(asteroidPrefabs[i], positionIn, rotationIn);
+                //Set attributes
+                AstroidController ac = asteroid.GetComponent<AstroidController>();
+                ac.Size = asteroidSizeIn;
+                ac.Speed = speedIn;
+
+                break;
+            }
         }
     }
 }

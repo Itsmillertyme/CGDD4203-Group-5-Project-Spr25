@@ -3,15 +3,16 @@ using UnityEngine;
 
 public class PlayerProjectileController : MonoBehaviour {
     //**PROPERTIES**
-    [SerializeField] float speed;
+    float speed;
     //
-    float initialSpeed;
     bool inTrigger = false;
+
+    public float Speed { get => speed; set => speed = value; }
 
     //**UNITY METHODS**
     void Update() {
         //Move forward
-        transform.Translate(Vector3.forward * (initialSpeed + speed) * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
     //
     private void OnTriggerEnter(Collider other) {
@@ -31,11 +32,6 @@ public class PlayerProjectileController : MonoBehaviour {
 
             StartCoroutine(TriggerReset());
         }
-    }
-
-    //**UTILITY METHODS**
-    public void SetInitialSpeed(float initSpeedIn) {
-        initialSpeed = initSpeedIn;
     }
 
     //**COROUTINES**

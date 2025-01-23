@@ -84,7 +84,7 @@ public class ShipController : MonoBehaviour {
 
             GameObject projectile = Instantiate(projectilePrefab, spawnPosition, spawnRotation);
 
-            projectile.GetComponent<PlayerProjectileController>().SetInitialSpeed(characterController.velocity.magnitude);
+            projectile.GetComponent<PlayerProjectileController>().Speed = Mathf.Max(7f, characterController.velocity.magnitude * 1.2f);
 
             StartCoroutine(laserRecharge());
             Destroy(projectile, 7f);
@@ -122,7 +122,7 @@ public class ShipController : MonoBehaviour {
         devOutput += $"Ship Veloctiy: {currentMovement}\n";
         devOutput += $"Ship Rot: {transform.rotation.eulerAngles}\n";
         devOutput += "====================\n";
-        if (gameManager.debugMode && gameManager.updateDebug) {
+        if (gameManager.UpdateDebug) {
             Debug.Log(devOutput);
         }
     }
@@ -172,7 +172,7 @@ public class ShipController : MonoBehaviour {
         }
         //DEV CODE - DELETE BEFORE FINAL BUILD
         devOutput += "====================\n";
-        if (gameManager.debugMode && gameManager.triggerDebug) {
+        if (gameManager.WallDebug) {
             Debug.Log(devOutput);
         }
     }
@@ -183,7 +183,7 @@ public class ShipController : MonoBehaviour {
         inTrigger = false;
         //DEV CODE - DELETE BEFORE FINAL BUILD
         devOutput += "====================\n";
-        if (gameManager.debugMode && gameManager.triggerDebug) {
+        if (gameManager.WallDebug) {
             Debug.Log(devOutput);
         }
     }

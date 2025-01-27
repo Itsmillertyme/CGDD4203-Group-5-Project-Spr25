@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Wall
   - PlayerProjectile
-  - Asteroid
   layers:
   - Default
   - TransparentFX

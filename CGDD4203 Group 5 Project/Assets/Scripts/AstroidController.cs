@@ -46,13 +46,16 @@ public class AstroidController : MonoBehaviour {
             //Destroy projectile
             Destroy(other.gameObject);
 
-            //split into smaller asteroids
+            //Split into smaller asteroids
             if (size != 1) {
                 Split(2);
             }
             else {
                 Destroy(gameObject);
             }
+
+            //Update player score
+            GameObject.FindWithTag("Player").GetComponent<ShipController>().updateScore(Size);
 
         }
     }

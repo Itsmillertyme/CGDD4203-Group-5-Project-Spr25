@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500mm"
+   height="500mm"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="2.5D GUI Drawings.svg"
+   inkscape:export-filename="..\CGDD4203 Group 5 Project\Assets\Sprites\RControls2.png"
+   inkscape:export-xdpi="25.4"
+   inkscape:export-ydpi="25.4"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="0.25"
+     inkscape:cx="1054"
+     inkscape:cy="980"
+     inkscape:window-width="1360"
+     inkscape:window-height="705"
+     inkscape:window-x="1194"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer3">
+    <sodipodi:guide
+       position="250.00024,447.43163"
+       orientation="1,0"
+       id="guide1119"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Base"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none">
+    <circle
+       style="opacity:0.99;fill:#020000;fill-opacity:1;stroke:#ffffff;stroke-width:2.64583;stroke-dasharray:none;stroke-opacity:1"
+       id="path1093"
+       cx="250"
+       cy="250"
+       r="248.66333" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="LControls"
+     style="display:none">
+    <path
+       id="path236"
+       style="fill:#ffffff;fill-opacity:0.329825;stroke:none;stroke-width:4.82561;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="0"
+       inkscape:original="M 368.85547 172.38086 C 355.16408 172.24961 339.41059 173.08354 321.28125 175.16016 C 193.09573 189.84311 100.93359 254.44665 100.93359 286.34766 C 100.93359 318.24867 193.09573 382.85221 321.28125 397.53516 C 466.31595 414.1481 459.40625 351.20312 459.40625 351.20312 L 459.40625 221.49219 C 459.40625 221.49219 464.69518 173.2996 368.85547 172.38086 z "
+       d="m 368.85547,172.38086 c -13.69139,-0.13125 -29.44488,0.70268 -47.57422,2.7793 -128.18552,14.68295 -220.34766,79.28649 -220.34766,111.1875 0,31.90101 92.16214,96.50455 220.34766,111.1875 145.0347,16.61294 138.125,-46.33204 138.125,-46.33204 V 221.49219 c 0,0 5.28893,-48.19259 -90.55078,-49.11133 z"
+       transform="matrix(0.55409113,0,0,0.5425503,220.74717,94.641474)"
+       inkscape:export-filename="..\CGDD4203 Group 5 Project\Assets\Sprites\LControls_Right.png"
+       inkscape:export-xdpi="280"
+       inkscape:export-ydpi="280" />
+    <path
+       id="path236-3"
+       style="fill:#ffffff;fill-opacity:0.329825;stroke:none;stroke-width:4.82561;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="0"
+       inkscape:original="M 368.85547 172.38086 C 355.16408 172.24961 339.41059 173.08354 321.28125 175.16016 C 193.09573 189.84311 100.93359 254.44665 100.93359 286.34766 C 100.93359 318.24867 193.09573 382.85221 321.28125 397.53516 C 466.31595 414.1481 459.40625 351.20312 459.40625 351.20312 L 459.40625 221.49219 C 459.40625 221.49219 464.69518 173.2996 368.85547 172.38086 z "
+       d="m 368.85547,172.38086 c -13.69139,-0.13125 -29.44488,0.70268 -47.57422,2.7793 -128.18552,14.68295 -220.34766,79.28649 -220.34766,111.1875 0,31.90101 92.16214,96.50455 220.34766,111.1875 145.0347,16.61294 138.125,-46.33204 138.125,-46.33204 V 221.49219 c 0,0 5.28893,-48.19259 -90.55078,-49.11133 z"
+       transform="matrix(-0.55409113,0,0,0.5425503,279.25279,94.641474)"
+       inkscape:export-filename="..\CGDD4203 Group 5 Project\Assets\Sprites\LControls_Lef.png"
+       inkscape:export-xdpi="280"
+       inkscape:export-ydpi="280" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="RControls"
+     style="display:inline"
+     inkscape:export-filename="..\CGDD4203 Group 5 Project\Assets\Sprites\RControls_RightPressed.png"
+     inkscape:export-xdpi="280"
+     inkscape:export-ydpi="280">
+    <ellipse
+       style="display:inline;opacity:0.99;fill:#ffffff;fill-opacity:0.329825;stroke:none;stroke-width:2.64583;stroke-dasharray:none;stroke-opacity:1"
+       id="path11373"
+       cx="-360.95187"
+       cy="-250"
+       rx="85.951881"
+       ry="129.70187"
+       transform="scale(-1)"
+       inkscape:export-filename="..\CGDD4203 Group 5 Project\Assets\Sprites\RControls_Right.png"
+       inkscape:export-xdpi="25.0952"
+       inkscape:export-ydpi="25.0952" />
+    <ellipse
+       style="display:inline;opacity:0.99;fill:#ffffff;fill-opacity:0.329825;stroke:none;stroke-width:2.64583;stroke-dasharray:none;stroke-opacity:1"
+       id="path11373-6"
+       cx="-139.048"
+       cy="-250"
+       rx="85.952003"
+       ry="129.70187"
+       transform="scale(-1)"
+       inkscape:export-filename="..\CGDD4203 Group 5 Project\Assets\Sprites\RControls_Left.png"
+       inkscape:export-xdpi="280"
+       inkscape:export-ydpi="280" />
+  </g>
+</svg>

@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
     //**PROPERTIES**
     [SerializeField] GameManager gameManager;
-    //
+    // 
     Transform player;
 
     //**UNITY METHODS**
@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
     void Update() {
         //Change camera view
         if (gameManager.ClassicCamera) {
-            transform.position = new Vector3(0, 50, 0);
+            transform.position = new Vector3(0, 55, 0);
             transform.rotation = Quaternion.Euler(90, 0, 0);
         }
         else {

@@ -15,12 +15,12 @@ public class CameraController : MonoBehaviour {
     void Update() {
         //Change camera view
         if (gameManager.ClassicCamera) {
-            transform.position = new Vector3(0, 50, 0); ;
+            transform.position = new Vector3(0, 50, 0);
             transform.rotation = Quaternion.Euler(90, 0, 0);
         }
         else {
-            transform.position = player.position + new Vector3(0, 15, -3);
-            transform.rotation = Quaternion.Euler(75, 0, 0);
+            transform.position = player.position + new Vector3(0, 70, 0);
+            transform.rotation = Quaternion.Euler(90, 0, 0);
         }
     }
 }

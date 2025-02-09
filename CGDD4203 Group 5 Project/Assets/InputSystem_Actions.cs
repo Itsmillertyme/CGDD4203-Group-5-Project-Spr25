@@ -71,6 +71,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""devSpawnEnemy"",
+                    ""type"": ""Button"",
+                    ""id"": ""597855cc-586e-4242-9e29-104213e48576"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -170,6 +179,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""devBreak"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb223a65-1825-48d4-9118-81f6b64f579d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""devSpawnEnemy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -762,6 +782,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_devBreak = m_Player.FindAction("devBreak", throwIfNotFound: true);
+        m_Player_devSpawnEnemy = m_Player.FindAction("devSpawnEnemy", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -846,6 +867,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_devBreak;
+    private readonly InputAction m_Player_devSpawnEnemy;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -855,6 +877,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @devBreak => m_Wrapper.m_Player_devBreak;
+        public InputAction @devSpawnEnemy => m_Wrapper.m_Player_devSpawnEnemy;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -879,6 +902,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @devBreak.started += instance.OnDevBreak;
             @devBreak.performed += instance.OnDevBreak;
             @devBreak.canceled += instance.OnDevBreak;
+            @devSpawnEnemy.started += instance.OnDevSpawnEnemy;
+            @devSpawnEnemy.performed += instance.OnDevSpawnEnemy;
+            @devSpawnEnemy.canceled += instance.OnDevSpawnEnemy;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -898,6 +924,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @devBreak.started -= instance.OnDevBreak;
             @devBreak.performed -= instance.OnDevBreak;
             @devBreak.canceled -= instance.OnDevBreak;
+            @devSpawnEnemy.started -= instance.OnDevSpawnEnemy;
+            @devSpawnEnemy.performed -= instance.OnDevSpawnEnemy;
+            @devSpawnEnemy.canceled -= instance.OnDevSpawnEnemy;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1085,6 +1114,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnDevBreak(InputAction.CallbackContext context);
+        void OnDevSpawnEnemy(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

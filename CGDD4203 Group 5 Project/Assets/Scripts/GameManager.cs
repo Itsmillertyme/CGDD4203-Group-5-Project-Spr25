@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -5,22 +6,26 @@ public class GameManager : MonoBehaviour {
     [Header("References")]
     [SerializeField] Transform[] walls;
     [SerializeField] GameObject[] asteroidPrefabs;
+    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] Transform enemyProjectileParent;
     //
     [Header("Game Settings")]
     [SerializeField] int levelWidth;
     [SerializeField] int levelHeight;
     [SerializeField] int asteroidNumber;
     [SerializeField] bool classicCamera;
-    [SerializeField] bool updateDebug;
+    [SerializeField] bool shipDebug;
     [SerializeField] bool wallDebug;
+    [SerializeField] bool enemyDebug;
     //
     Vector2 levelSize = Vector2.zero;
 
     //**FIELDS**    
     public Vector2 LevelSize { get => levelSize; }
     public bool ClassicCamera { get => classicCamera; set => classicCamera = value; }
-    public bool UpdateDebug { get => updateDebug; set => updateDebug = value; }
+    public bool ShipDebug { get => shipDebug; set => shipDebug = value; }
     public bool WallDebug { get => wallDebug; set => wallDebug = value; }
+    public bool EnemyDebug { get => enemyDebug; set => enemyDebug = value; }
 
     //**UNITY METHODS**
     private void Awake() {
@@ -49,6 +54,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    //**UTILITY METHODS**
     public void CreateAsteroid(Vector3 positionIn, Quaternion rotationIn, int asteroidSizeIn, float speedIn) {
 
         for (int i = 0; i < asteroidPrefabs.Length; i++) {
@@ -64,6 +70,33 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
+    //
+    public List<Vector3> GenerateEnemyWaypoints() {
+        List<Vector3> waypoints = new List<Vector3>();
+
+        //Get number of waypoints to add
+        int numWaypoints = Random.Range(3, 6); //3-5 waypoints
+
+        //Generate each random one
+        for (int i = 0; i < numWaypoints; i++) {
+            float xCoord = Random.Range(levelWidth / -2f, levelWidth / 2f + 1);
+            float zCoord = Random.Range(levelHeight / -2f, levelHeight / 2f + 1);
+            waypoints.Add(new Vector3(xCoord, 0, zCoord));
+        }
+
+        //Make last waypoint way offscreen
+        waypoints.Add(new Vector3(Random.Range(levelWidth / 2f + 5, 75), 0, Random.Range(-75, levelHeight / -2f - 5)));
+
+        return waypoints;
+    }
+    //
+    public void SpawnEnemy() {
+        //Spawn
+        GameObject enemy = Instantiate(enemyPrefab, new Vector3(Random.Range(-74, levelWidth / -2f - 3), 0, Random.Range(levelHeight / 2f + 3, 74)), Quaternion.Euler(0, 0, 0));
+    }
 }
+
+
+
 
 

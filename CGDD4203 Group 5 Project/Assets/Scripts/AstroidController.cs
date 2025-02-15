@@ -55,7 +55,7 @@ public class AstroidController : MonoBehaviour {
             }
 
             //Update player score
-            GameObject.FindWithTag("Player").GetComponent<ShipController>().updateScore(Size);
+            GameObject.FindWithTag("Player").GetComponent<ShipController>().UpdateScore(Size);
 
         }
     }

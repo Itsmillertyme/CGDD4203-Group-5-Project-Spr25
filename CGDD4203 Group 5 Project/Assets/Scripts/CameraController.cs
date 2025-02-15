@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
     void Update() {
         //Change camera view
         if (gameManager.ClassicCamera) {
-            transform.position = new Vector3(0, 55, 0);
+            transform.position = new Vector3(0, 110, 0);
             transform.rotation = Quaternion.Euler(90, 0, 0);
         }
         else {

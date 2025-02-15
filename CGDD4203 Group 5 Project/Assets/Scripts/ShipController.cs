@@ -8,18 +8,15 @@ using UnityEngine.UI;
 public class ShipController : MonoBehaviour {
     //**PROPERTIES**
     [Header("Movement Settings")]
-    [SerializeField] float thrustForce;
     [SerializeField] float rotationSpeed;
     [SerializeField] int speedLimit;
-    //
-    [Header("Laser Settings")]
-    [SerializeField] float laserRechargeTime;
     //
     [Header("References")]
     [SerializeField] InputActionAsset inputActionAsset;
     [SerializeField] GameManager gameManager;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform projectileSpawn;
+    [SerializeField] Transform projectileParent;
     [SerializeField] HUDController hudController;
     [SerializeField] Button btnLTurn;
     [SerializeField] Button btnRTurn;
@@ -29,21 +26,25 @@ public class ShipController : MonoBehaviour {
     PlayerInput playerInput;
     CharacterController characterController;
     ParticleSystem flameParticles;
+    ShipStatistics stats;
     //
     InputAction thrustAction;
     InputAction turnAction;
     InputAction fireAction;
     //DEV CODE - DELETE BEFORE FINAL BUILD
     InputAction breakAction;
+    InputAction spawnAction;
+    bool spawnedThisPress;
     //
     Vector3 currentMovement = Vector3.zero;
     float desiredYRotation = 0f;
     int score = 0;
-    int maxHealth = 100;
-    int health = 100;
     bool inTrigger = false;
     bool laserCharged = true;
     bool isInvulnerable = false;
+
+    //**FIELDS**
+    public bool IsInvulnerable { get => isInvulnerable; }
 
 
     //**UNITY METHODS**
@@ -53,12 +54,16 @@ public class ShipController : MonoBehaviour {
         playerInput = GetComponent<PlayerInput>();
         flameParticles = GetComponentInChildren<ParticleSystem>();
 
+        //Initialize Statistics (tf-3, lrt-1s, hp = 100)
+        stats = new ShipStatistics();
+
         // Initialize the input actions
         thrustAction = playerInput.actions["Thrust"];
         turnAction = playerInput.actions["Turn"];
         fireAction = playerInput.actions["Fire"];
         //DEV CODE - DELETE BEFORE FINAL BUILD
         breakAction = playerInput.actions["devBreak"];
+        spawnAction = playerInput.actions["devSpawnEnemy"];
     }
     //
     void Update() {
@@ -67,11 +72,11 @@ public class ShipController : MonoBehaviour {
         devOutput += $"Inside trigger? {inTrigger}\n";
 
 
-        devOutput += $"Health: {health / (float) maxHealth}\n";
+        devOutput += $"Health: {stats.ShieldPower / (float) stats.ShieldPowerMax}\n";
 
         //Update HUD
         hudController.SetScoreValue(score);
-        hudController.SetHealthBar(health / (float) maxHealth);
+        hudController.SetHealthBar(stats.ShieldPower / (float) stats.ShieldPowerMax);
 
         //*Input Handling*
         //Thrust
@@ -79,7 +84,7 @@ public class ShipController : MonoBehaviour {
 
             ChangeButtonColor(btnThrust, new Color(245 / 255f, 245 / 255f, 245 / 255f));
 
-            Vector3 thrust = (transform.rotation * Vector3.forward).normalized * thrustForce * .01f;
+            Vector3 thrust = (transform.rotation * Vector3.forward).normalized * stats.ThrustForce * .01f;
             currentMovement += thrust;
 
             //Particles
@@ -110,7 +115,7 @@ public class ShipController : MonoBehaviour {
             devOutput += $"Spawning projectile at position: {spawnPosition} with rotation: {spawnRotation.eulerAngles}\n";
             devOutput += $"Velocity Mag of ship: {characterController.velocity.magnitude}\n";
 
-            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, spawnRotation);
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, spawnRotation, projectileParent);
 
             projectile.GetComponent<PlayerProjectileController>().Speed = Mathf.Max(7f, characterController.velocity.magnitude * 1.2f);
 
@@ -171,16 +176,22 @@ public class ShipController : MonoBehaviour {
         if (breakAction.ReadValue<float>() != 0) {
             Debug.Break();
         }
+
+        if (spawnAction.ReadValue<float>() != 0 && !spawnedThisPress) {
+            gameManager.SpawnEnemy();
+            spawnedThisPress = true;
+        }
+        else if (spawnAction.ReadValue<float>() == 0) {
+            spawnedThisPress = false;
+        }
+
         devOutput += $"Ship Veloctiy: {currentMovement}\n";
         devOutput += $"Ship Rot: {transform.rotation.eulerAngles}\n";
         devOutput += "====================\n";
-        if (gameManager.UpdateDebug) {
+        if (gameManager.ShipDebug) {
             Debug.Log(devOutput);
         }
     }
-
-
-
     //
     private void OnTriggerEnter(Collider other) {
         //DEV CODE - DELETE BEFORE FINAL BUILD
@@ -227,9 +238,6 @@ public class ShipController : MonoBehaviour {
         }
         else if (other.gameObject.tag == "Asteroid" && !isInvulnerable) {
 
-            //Go invulnerable
-            StartCoroutine(Invulnerability(3, 1));
-
             //Split asteroid
             other.GetComponent<AstroidController>().Split(2);
 
@@ -238,17 +246,19 @@ public class ShipController : MonoBehaviour {
             int damage;
 
             if (asteroidSize == 1) {
-                damage = (int) (maxHealth * .05f);
+                damage = (int) (stats.ShieldPowerMax * .05f);
             }
             else if (asteroidSize == 2) {
-                damage = (int) (maxHealth * .1f);
+                damage = (int) (stats.ShieldPowerMax * .1f);
             }
             else {
-                damage = (int) (maxHealth * .2f);
+                damage = (int) (stats.ShieldPowerMax * .2f);
             }
 
             //Debug.Log($"Damage dealt: {damage}");
-            UpdateHealth(-damage);
+
+            //Apply stat data
+            stats.ApplyStatisticsMod(new ShipStatisticModifierData(-damage, 0, 0));
         }
 
 
@@ -276,13 +286,17 @@ public class ShipController : MonoBehaviour {
         cb.normalColor = newColor;
         btn.colors = cb;
     }
-    //
-    void UpdateHealth(int amount) {
-        health += amount;
-        health = Mathf.Clamp(health, 0, maxHealth);
+
+    public void UpdateHealth(int amount) {
+        if (amount < 0) {
+            //Go invulnerable
+            StartCoroutine(Invulnerability(3, 1));
+        }
+
+        stats.ApplyStatisticsMod(new ShipStatisticModifierData(-amount, 0, 0));
     }
-    //
-    public void updateScore(int amount) {
+
+    public void UpdateScore(int amount) {
         score += amount;
         score = Mathf.Max(score, 0);
     }
@@ -295,7 +309,9 @@ public class ShipController : MonoBehaviour {
     IEnumerator Invulnerability(float duration, float pulseFrequency) {
         //Set flag
         isInvulnerable = true;
-        Debug.Log("INVULNERABLE");
+        if (gameManager.ShipDebug) {
+            Debug.Log("Player ship is now invulnerable");
+        }
 
         MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
 
@@ -340,7 +356,9 @@ public class ShipController : MonoBehaviour {
         }
 
         isInvulnerable = false;
-        Debug.Log("Vulnerable");
+        if (gameManager.ShipDebug) {
+            Debug.Log("Player ship is now vulnerable");
+        }
     }
 }
 

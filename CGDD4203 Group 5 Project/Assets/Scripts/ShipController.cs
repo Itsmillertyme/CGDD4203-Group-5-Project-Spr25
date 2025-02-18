@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
-public class ShipController : MonoBehaviour {
+public class ShipController : MonoBehaviour
+{
     //**PROPERTIES**
     [Header("Movement Settings")]
     [SerializeField] float rotationSpeed;
     [SerializeField] int speedLimit;
+    //
+    [Header("Movement Events")]
+    public UnityEvent<float> onThrust;
+    [Header("Laser Settings")]
+    [SerializeField] float laserRechargeTime;
     //
     [Header("References")]
     [SerializeField] InputActionAsset inputActionAsset;
@@ -25,7 +32,6 @@ public class ShipController : MonoBehaviour {
     //
     PlayerInput playerInput;
     CharacterController characterController;
-    ParticleSystem flameParticles;
     ShipStatistics stats;
     //
     InputAction thrustAction;
@@ -48,11 +54,11 @@ public class ShipController : MonoBehaviour {
 
 
     //**UNITY METHODS**
-    void Awake() {
+    void Awake()
+    {
         // Cache references
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        flameParticles = GetComponentInChildren<ParticleSystem>();
 
         //Initialize Statistics (tf-3, lrt-1s, hp = 100)
         stats = new ShipStatistics();
@@ -66,44 +72,47 @@ public class ShipController : MonoBehaviour {
         spawnAction = playerInput.actions["devSpawnEnemy"];
     }
     //
-    void Update() {
+    void Update()
+    {
         //DEV CODE - DELETE BEFORE FINAL BUILD
         string devOutput = "\tDEBUG - Update\n====================\n";
         devOutput += $"Inside trigger? {inTrigger}\n";
 
 
-        devOutput += $"Health: {stats.ShieldPower / (float) stats.ShieldPowerMax}\n";
+        devOutput += $"Health: {stats.ShieldPower / (float)stats.ShieldPowerMax}\n";
 
         //Update HUD
         hudController.SetScoreValue(score);
-        hudController.SetHealthBar(stats.ShieldPower / (float) stats.ShieldPowerMax);
+        hudController.SetHealthBar(stats.ShieldPower / (float)stats.ShieldPowerMax);
 
         //*Input Handling*
         //Thrust
-        if (thrustAction.ReadValue<float>() != 0) {
+        if (thrustAction.ReadValue<float>() != 0)
+        {
 
             ChangeButtonColor(btnThrust, new Color(245 / 255f, 245 / 255f, 245 / 255f));
 
             Vector3 thrust = (transform.rotation * Vector3.forward).normalized * stats.ThrustForce * .01f;
             currentMovement += thrust;
 
-            //Particles
-            flameParticles.Play();
+            // Particles & Other FX
+            onThrust.Invoke(1.0f);
             //DEV CODE - DELETE BEFORE FINAL BUILD
             devOutput += $"Thrust applied in direction: {Mathf.Round(thrust.x * 1000) / 1000},{Mathf.Round(thrust.z * 1000) / 1000}\n";
         }
-        else {
-            //Particles
-            flameParticles.Stop();
-
+        else
+        {
             ChangeButtonColor(btnThrust, new Color(200 / 255f, 200 / 255f, 200 / 255f));
 
+            // Particles & Other FX
+            onThrust.Invoke(0f);
             //DEV CODE - DELETE BEFORE FINAL BUILD
             devOutput += "No thrust\n";
         }
         //
         //Fire
-        if (fireAction.ReadValue<float>() != 0 && laserCharged) {
+        if (fireAction.ReadValue<float>() != 0 && laserCharged)
+        {
             //Change button colors
             ChangeButtonColor(btnFire, new Color(245 / 255f, 245 / 255f, 245 / 255f));
 
@@ -123,7 +132,8 @@ public class ShipController : MonoBehaviour {
             Destroy(projectile, 7f);
         }
         //Test if fire button not pressed
-        else if (fireAction.ReadValue<float>() == 0) {
+        else if (fireAction.ReadValue<float>() == 0)
+        {
             //DEV CODE - DELETE BEFORE FINAL BUILD
             devOutput += "Fire button not pressed\n";
 
@@ -135,19 +145,22 @@ public class ShipController : MonoBehaviour {
 
         float input = turnAction.ReadValue<float>();
 
-        if (input < 0) {
+        if (input < 0)
+        {
             //Turn on button
             ChangeButtonColor(btnLTurn, new Color(245 / 255f, 245 / 255f, 245 / 255f));
             //Turn off button
             ChangeButtonColor(btnRTurn, new Color(200 / 255f, 200 / 255f, 200 / 255f));
         }
-        else if (input > 0) {
+        else if (input > 0)
+        {
             //Turn on button
             ChangeButtonColor(btnRTurn, new Color(245 / 255f, 245 / 255f, 245 / 255f));
             //Turn off button
             ChangeButtonColor(btnLTurn, new Color(200 / 255f, 200 / 255f, 200 / 255f));
         }
-        else {
+        else
+        {
             //Turn off buttons
             ChangeButtonColor(btnLTurn, new Color(200 / 255f, 200 / 255f, 200 / 255f));
             ChangeButtonColor(btnRTurn, new Color(200 / 255f, 200 / 255f, 200 / 255f));
@@ -173,43 +186,52 @@ public class ShipController : MonoBehaviour {
         characterController.Move(currentMovement * Time.deltaTime);
 
         //DEV CODE - DELETE BEFORE FINAL BUILD
-        if (breakAction.ReadValue<float>() != 0) {
+        if (breakAction.ReadValue<float>() != 0)
+        {
             Debug.Break();
         }
 
-        if (spawnAction.ReadValue<float>() != 0 && !spawnedThisPress) {
+        if (spawnAction.ReadValue<float>() != 0 && !spawnedThisPress)
+        {
             gameManager.SpawnEnemy();
             spawnedThisPress = true;
         }
-        else if (spawnAction.ReadValue<float>() == 0) {
+        else if (spawnAction.ReadValue<float>() == 0)
+        {
             spawnedThisPress = false;
         }
 
         devOutput += $"Ship Veloctiy: {currentMovement}\n";
         devOutput += $"Ship Rot: {transform.rotation.eulerAngles}\n";
         devOutput += "====================\n";
-        if (gameManager.ShipDebug) {
+        if (gameManager.ShipDebug)
+        {
             Debug.Log(devOutput);
         }
     }
     //
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         //DEV CODE - DELETE BEFORE FINAL BUILD
         string devOutput = "\tDEBUG - Trigger Enter\n====================\n";
 
-        if (other.gameObject.tag == "Wall" && !inTrigger) {
+        if (other.gameObject.tag == "Wall" && !inTrigger)
+        {
             inTrigger = true;
             //DEV CODE - DELETE BEFORE FINAL BUILD
             devOutput += $"Wall Collision\n";
             devOutput += $"Wall dimensions: ({other.transform.localScale.x},{other.transform.localScale.z})\n";
 
             Vector3 newPosition = Vector3.zero;
-            if (other.transform.localScale.x > other.transform.localScale.z) {
-                if (other.transform.position.z > 0) {
+            if (other.transform.localScale.x > other.transform.localScale.z)
+            {
+                if (other.transform.position.z > 0)
+                {
                     //DEV CODE - DELETE BEFORE FINAL BUILD
                     devOutput += "Hit the North wall\n";
                 }
-                else {
+                else
+                {
                     //DEV CODE - DELETE BEFORE FINAL BUILD
                     devOutput += "Hit the South wall\n";
                 }
@@ -217,13 +239,16 @@ public class ShipController : MonoBehaviour {
 
                 newPosition = new Vector3(transform.position.x, 0, -transform.position.z < 0 ? -(gameManager.LevelSize.y / 2 - (transform.localScale.z * 1.7f)) : (gameManager.LevelSize.y / 2 - (transform.localScale.z * 1.7f)));
             }
-            else {
+            else
+            {
 
-                if (other.transform.position.x > 0) {
+                if (other.transform.position.x > 0)
+                {
                     //DEV CODE - DELETE BEFORE FINAL BUILD
                     devOutput += "Hit the East wall\n";
                 }
-                else {
+                else
+                {
                     //DEV CODE - DELETE BEFORE FINAL BUILD
                     devOutput += "Hit the West wall\n";
                 }
@@ -236,7 +261,8 @@ public class ShipController : MonoBehaviour {
             Vector3 displacement = newPosition - transform.position;
             characterController.Move(displacement);
         }
-        else if (other.gameObject.tag == "Asteroid" && !isInvulnerable) {
+        else if (other.gameObject.tag == "Asteroid" && !isInvulnerable)
+        {
 
             //Split asteroid
             other.GetComponent<AstroidController>().Split(2);
@@ -245,14 +271,17 @@ public class ShipController : MonoBehaviour {
             int asteroidSize = other.GetComponent<AstroidController>().Size;
             int damage;
 
-            if (asteroidSize == 1) {
-                damage = (int) (stats.ShieldPowerMax * .05f);
+            if (asteroidSize == 1)
+            {
+                damage = (int)(stats.ShieldPowerMax * .05f);
             }
-            else if (asteroidSize == 2) {
-                damage = (int) (stats.ShieldPowerMax * .1f);
+            else if (asteroidSize == 2)
+            {
+                damage = (int)(stats.ShieldPowerMax * .1f);
             }
-            else {
-                damage = (int) (stats.ShieldPowerMax * .2f);
+            else
+            {
+                damage = (int)(stats.ShieldPowerMax * .2f);
             }
 
             //Debug.Log($"Damage dealt: {damage}");
@@ -264,31 +293,37 @@ public class ShipController : MonoBehaviour {
 
         //DEV CODE - DELETE BEFORE FINAL BUILD
         devOutput += "====================\n";
-        if (gameManager.WallDebug) {
+        if (gameManager.WallDebug)
+        {
             Debug.Log(devOutput);
         }
     }
     //
-    private void OnTriggerExit(Collider other) {
+    private void OnTriggerExit(Collider other)
+    {
         //DEV CODE - DELETE BEFORE FINAL BUILD
         string devOutput = "\tDEBUG - Trigger Exit\n====================\n";
         inTrigger = false;
         //DEV CODE - DELETE BEFORE FINAL BUILD
         devOutput += "====================\n";
-        if (gameManager.WallDebug) {
+        if (gameManager.WallDebug)
+        {
             Debug.Log(devOutput);
         }
     }
 
     //**UTILITY METHODS**
-    private void ChangeButtonColor(Button btn, Color newColor) {
+    private void ChangeButtonColor(Button btn, Color newColor)
+    {
         ColorBlock cb = btn.colors;
         cb.normalColor = newColor;
         btn.colors = cb;
     }
 
-    public void UpdateHealth(int amount) {
-        if (amount < 0) {
+    public void UpdateHealth(int amount)
+    {
+        if (amount < 0)
+        {
             //Go invulnerable
             StartCoroutine(Invulnerability(3, 1));
         }
@@ -296,20 +331,24 @@ public class ShipController : MonoBehaviour {
         stats.ApplyStatisticsMod(new ShipStatisticModifierData(-amount, 0, 0));
     }
 
-    public void UpdateScore(int amount) {
+    public void UpdateScore(int amount)
+    {
         score += amount;
         score = Mathf.Max(score, 0);
     }
     //**COROUTINES**
-    IEnumerator laserRecharge() {
+    IEnumerator laserRecharge()
+    {
         yield return new WaitForSeconds(laserRechargeTime);
         laserCharged = true;
     }
 
-    IEnumerator Invulnerability(float duration, float pulseFrequency) {
+    IEnumerator Invulnerability(float duration, float pulseFrequency)
+    {
         //Set flag
         isInvulnerable = true;
-        if (gameManager.ShipDebug) {
+        if (gameManager.ShipDebug)
+        {
             Debug.Log("Player ship is now invulnerable");
         }
 
@@ -317,9 +356,12 @@ public class ShipController : MonoBehaviour {
 
         // Store the initial colors of the materials
         Dictionary<Material, Color> originalColors = new Dictionary<Material, Color>();
-        foreach (var renderer in meshes) {
-            foreach (var material in renderer.materials) {
-                if (!originalColors.ContainsKey(material)) {
+        foreach (var renderer in meshes)
+        {
+            foreach (var material in renderer.materials)
+            {
+                if (!originalColors.ContainsKey(material))
+                {
                     originalColors[material] = material.color;
                 }
             }
@@ -329,13 +371,16 @@ public class ShipController : MonoBehaviour {
         float halfCycle = pulseFrequency / 2f;
 
 
-        while (elapsedTime < duration) {
+        while (elapsedTime < duration)
+        {
             // Calculate the interpolation factor based on ping-pong effect
             float t = Mathf.PingPong(elapsedTime, halfCycle) / halfCycle;
 
             // Apply the color interpolation to all materials
-            foreach (var renderer in meshes) {
-                foreach (var material in renderer.materials) {
+            foreach (var renderer in meshes)
+            {
+                foreach (var material in renderer.materials)
+                {
                     Color originalColor = originalColors[material];
                     Color targetColor = Color.red;
                     material.color = Color.Lerp(originalColor, targetColor, t);
@@ -347,16 +392,20 @@ public class ShipController : MonoBehaviour {
         }
 
         // Restore original colors
-        foreach (MeshRenderer renderer in meshes) {
-            foreach (Material material in renderer.materials) {
-                if (originalColors.ContainsKey(material)) {
+        foreach (MeshRenderer renderer in meshes)
+        {
+            foreach (Material material in renderer.materials)
+            {
+                if (originalColors.ContainsKey(material))
+                {
                     material.color = originalColors[material];
                 }
             }
         }
 
         isInvulnerable = false;
-        if (gameManager.ShipDebug) {
+        if (gameManager.ShipDebug)
+        {
             Debug.Log("Player ship is now vulnerable");
         }
     }

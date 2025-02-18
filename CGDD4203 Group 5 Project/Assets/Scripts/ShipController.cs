@@ -302,7 +302,7 @@ public class ShipController : MonoBehaviour {
     }
     //**COROUTINES**
     IEnumerator laserRecharge() {
-        yield return new WaitForSeconds(laserRechargeTime);
+        yield return new WaitForSeconds(0.05f); // TODO: Bring back constant
         laserCharged = true;
     }
 

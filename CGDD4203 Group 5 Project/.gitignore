@@ -76,3 +76,16 @@ crashlytics-build.properties
 
 # VSCode
 .vscode
+
+# Blender Save Backup files
+*.blend1
+*.blend2
+*.blend3
+
+# FBXReview/DXVK Logs & Cache
+fbxreview_d3d11.log*
+fbxreview_dxgi.log*
+*.dxvk-cache
+
+# Mono Crash Blobs
+mono_crash.*.blob

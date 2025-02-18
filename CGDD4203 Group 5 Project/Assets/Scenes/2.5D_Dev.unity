@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 1348688743}
   - component: {fileID: 1348688742}
   - component: {fileID: 1348688746}
+  - component: {fileID: 1348688747}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -714,12 +715,12 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 71.709175
+  m_FocalLength: 21.982569
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
   m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 21.946, y: 16.002}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -727,11 +728,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 19
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -755,8 +756,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348688741}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 110, z: 0}
+  m_LocalRotation: {x: 0.49075168, y: 0, z: 0, w: 0.8712995}
+  m_LocalPosition: {x: 0, y: 24.023592, z: -6.0877266}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -776,6 +777,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 2087258541}
+--- !u!114 &1348688747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348688741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!114 &1386730234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3027340419636352261, guid: 358c1594da0f25b44b8c306810e41ff8, type: 3}
@@ -1396,15 +1429,15 @@ MonoBehaviour:
   - {fileID: 5630201527549435715, guid: 5230cdf87081a7b4e96fa1375a02a765, type: 3}
   - {fileID: 5630201527549435715, guid: c0978fb7b280e1a4db23a768ca6dbb2b, type: 3}
   - {fileID: 5630201527549435715, guid: 38b384e8f53302e4c9f2a7c6cb83e95e, type: 3}
-  enemyPrefab: {fileID: 6774610129193375542, guid: 2e3116bc7618c144380ebafdeae17940, type: 3}
-  enemyProjectileParent: {fileID: 624399279}
+  enemyPrefab: {fileID: 0}
+  enemyProjectileParent: {fileID: 0}
   levelWidth: 56
   levelHeight: 100
   asteroidNumber: 0
   classicCamera: 1
   shipDebug: 0
   wallDebug: 0
-  enemyDebug: 1
+  enemyDebug: 0
 --- !u!114 &2087258542
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1296,7 +1296,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1340,8 +1340,8 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
+  m_ColorTemperature: 6500
+  m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -1359,13 +1359,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084523969}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.78097844, y: -0.18359771, z: 0.59501624, w: 0.04816883}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.081, y: -252.511, z: -166.111}
 --- !u!114 &1084523972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,8 +1748,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 3
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
+    m_Quality: 1
     m_FrameInfluence: 0.1
     m_JitterScale: 1
     m_MipBias: 0
@@ -2679,10 +2679,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: speedLimit
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 2087258541}
@@ -2732,6 +2728,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_NotificationBehavior
+    - target: {fileID: 3655234902603312944, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
@@ -2980,19 +2978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5396049340621166595, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6472503618482460071, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6472503618482460071, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6472503618482460071, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6472503618482460071, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_LocalPosition.x

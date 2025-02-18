@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a0b9f0cc9e094dc4c9d68ae27e489b68
+guid: 6916c79722911ba468d588d3346a1e4a
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Orbitron
+  - Techno Hideo
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

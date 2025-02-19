@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1459600473998886129}
   - component: {fileID: 7944669394556740953}
   - component: {fileID: 6374362662614420322}
-  - component: {fileID: 8761452826749800106}
+  - component: {fileID: 6502850519854727917}
   m_Layer: 0
   m_Name: OverheadCamera
   m_TagString: Untagged
@@ -58,8 +58,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870181216070466932}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.49075168, y: 0, z: 0, w: 0.8712995}
-  m_LocalPosition: {x: 0, y: 12.011796, z: -3.0438633}
+  m_LocalRotation: {x: 0.17280474, y: -0.000000009342508, z: 0.000000001639088, w: 0.98495615}
+  m_LocalPosition: {x: 0.00000012763817, y: 5.0631695, z: -6.7282786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,26 +120,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 23.7
+  CameraDistance: 16.1
   DeadZoneDepth: 0.38
   Composition:
-    ScreenPosition: {x: 0, y: 0.42}
+    ScreenPosition: {x: 0, y: 0.421577}
     DeadZone:
       Enabled: 0
       Size: {x: 0.32, y: 0.2}
     HardLimits:
       Enabled: 0
-      Size: {x: 0.8, y: 0.8}
+      Size: {x: 3, y: 3}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 0, y: 0, z: 0}
   Lookahead:
-    Enabled: 0
-    Time: 0.157
-    Smoothing: 1.2
+    Enabled: 1
+    Time: 0.089
+    Smoothing: 4.82
     IgnoreY: 0
---- !u!114 &8761452826749800106
+--- !u!114 &6502850519854727917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,31 +148,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1870181216070466932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d54399b04b4fa48a73e121d4937dd4, type: 3}
+  m_Script: {fileID: 11500000, guid: f38bda98361e1de48a4ca2bd86ea3c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReferenceFrame: 1
-  RecenterTarget: 0
-  PanAxis:
-    Value: 0
-    Center: 0
-    Range: {x: -180, y: 180}
-    Wrap: 1
-    Recentering:
+  Composition:
+    ScreenPosition: {x: 0, y: 0}
+    DeadZone:
       Enabled: 0
-      Wait: 1
-      Time: 2
-    Restrictions: 0
-  TiltAxis:
-    Value: 58.78
-    Center: 0
-    Range: {x: -70, y: 70}
-    Wrap: 0
-    Recentering:
+      Size: {x: 0.2, y: 0.2}
+    HardLimits:
       Enabled: 0
-      Wait: 1
-      Time: 2
-    Restrictions: 0
+      Size: {x: 0.8, y: 0.8}
+      Offset: {x: 0, y: 0}
+  CenterOnActivate: 1
+  TargetOffset: {x: 0, y: 2, z: 9}
+  Damping: {x: 0.2, y: 0.5}
+  Lookahead:
+    Enabled: 0
+    Time: 0.12
+    Smoothing: 0
+    IgnoreY: 0
 --- !u!1 &5083136842464888278
 GameObject:
   m_ObjectHideFlags: 0

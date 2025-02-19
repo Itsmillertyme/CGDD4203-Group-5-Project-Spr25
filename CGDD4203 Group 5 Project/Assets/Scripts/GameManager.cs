@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField] int levelWidth;
     [SerializeField] int levelHeight;
     [SerializeField] int asteroidNumber;
-    [SerializeField] bool classicCamera;
     [SerializeField] bool shipDebug;
     [SerializeField] bool wallDebug;
     [SerializeField] bool enemyDebug;
@@ -22,7 +21,6 @@ public class GameManager : MonoBehaviour {
 
     //**FIELDS**    
     public Vector2 LevelSize { get => levelSize; }
-    public bool ClassicCamera { get => classicCamera; set => classicCamera = value; }
     public bool ShipDebug { get => shipDebug; set => shipDebug = value; }
     public bool WallDebug { get => wallDebug; set => wallDebug = value; }
     public bool EnemyDebug { get => enemyDebug; set => enemyDebug = value; }

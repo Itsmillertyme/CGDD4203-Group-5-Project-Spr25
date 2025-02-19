@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
@@ -33,7 +34,7 @@ public class AsteroidSpawner : MonoBehaviour
     public void CreateAsteroid(Vector3 positionIn, Quaternion rotationIn, int asteroidSizeIn, float speedIn)
     {
         //Create GameObject
-        GameObject asteroid = Instantiate(asteroidPrefabs[asteroidSizeIn - 1], positionIn, rotationIn);
+        GameObject asteroid = Instantiate(asteroidPrefabs[System.Math.Clamp(asteroidSizeIn, 0, asteroidPrefabs.Length) - 1], positionIn, rotationIn); // using System.Math because it has an integer clamping function
         //Set attributes
         AstroidController ac = asteroid.GetComponent<AstroidController>();
         ac.Size = asteroidSizeIn;

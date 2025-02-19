@@ -9,6 +9,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CharacterController))]
 public class ShipController : MonoBehaviour
 {
+    public static ShipController current;
+
     //**PROPERTIES**
     [Header("Movement Settings")]
     [SerializeField] float rotationSpeed;
@@ -58,6 +60,10 @@ public class ShipController : MonoBehaviour
 
 
     //**UNITY METHODS**
+    void OnEnable()
+    {
+        current = this;
+    }
     void Awake()
     {
         // Cache references

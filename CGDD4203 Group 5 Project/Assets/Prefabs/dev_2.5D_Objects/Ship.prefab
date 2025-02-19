@@ -209,6 +209,7 @@ Transform:
   m_Children:
   - {fileID: 880991853073960752}
   - {fileID: 755681021778281427}
+  - {fileID: 3625168198080988148}
   - {fileID: 1459600473998886129}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -301,6 +302,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   projectilePrefab: {fileID: 751238887151064644, guid: 7622dc4eeb8d40142a553934b0f77a1d, type: 3}
   projectileSpawn: {fileID: 755681021778281427}
+  projectileSpawn2: {fileID: 0}
   projectileParent: {fileID: 0}
   hudController: {fileID: 0}
   btnLTurn: {fileID: 0}
@@ -342,6 +344,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2954417748739552541}
+  thrustSmoothingUp: 5
+  thrustSmoothingDown: 50
+--- !u!1 &5929218346297150477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3625168198080988148}
+  m_Layer: 0
+  m_Name: ProjectileSpawn 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3625168198080988148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929218346297150477}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.283, y: 0, z: 0.252}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6472503618482460071}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &843105590447302875
 PrefabInstance:
   m_ObjectHideFlags: 0

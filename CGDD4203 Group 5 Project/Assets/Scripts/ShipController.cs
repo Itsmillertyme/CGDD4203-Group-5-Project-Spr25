@@ -23,6 +23,7 @@ public class ShipController : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform projectileSpawn;
+    [SerializeField] Transform projectileSpawn2;
     [SerializeField] Transform projectileParent;
     [SerializeField] HUDController hudController;
     [SerializeField] Button btnLTurn;
@@ -119,17 +120,20 @@ public class ShipController : MonoBehaviour
             laserCharged = false;
 
             Vector3 spawnPosition = projectileSpawn.position;
+            Vector3 spawnPosition2 = projectileSpawn2.position;
             Quaternion spawnRotation = transform.rotation;
 
             devOutput += $"Spawning projectile at position: {spawnPosition} with rotation: {spawnRotation.eulerAngles}\n";
             devOutput += $"Velocity Mag of ship: {characterController.velocity.magnitude}\n";
 
             GameObject projectile = Instantiate(projectilePrefab, spawnPosition, spawnRotation, projectileParent);
+            GameObject projectile2 = Instantiate(projectilePrefab, spawnPosition2, spawnRotation, projectileParent);
 
             projectile.GetComponent<PlayerProjectileController>().Speed = Mathf.Max(7f, characterController.velocity.magnitude * 1.2f);
-
+            projectile2.GetComponent<PlayerProjectileController>().Speed = Mathf.Max(7f, characterController.velocity.magnitude * 1.2f);
             StartCoroutine(laserRecharge());
-            Destroy(projectile, 7f);
+            Destroy(projectile2, 5f);
+            Destroy(projectile, 5f);
         }
         //Test if fire button not pressed
         else if (fireAction.ReadValue<float>() == 0)

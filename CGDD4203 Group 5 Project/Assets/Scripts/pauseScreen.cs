@@ -7,8 +7,6 @@ public class pauseScreen : MonoBehaviour
 
     void Awake()
     {
-        gameHUD.SetActive(false);
-        startScreen.SetActive(true);
         Time.timeScale = 0;
     }
 

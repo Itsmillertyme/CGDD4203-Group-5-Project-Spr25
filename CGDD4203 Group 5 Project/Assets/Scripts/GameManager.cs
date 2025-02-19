@@ -1,32 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
+    public static GameManager current;
     //**PROPERTIES**       
     [Header("References")]
     [SerializeField] Transform[] walls;
     [SerializeField] GameObject[] asteroidPrefabs;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform enemyProjectileParent;
+    public AsteroidSpawner asteroidSpawner;
     //
     [Header("Game Settings")]
     [SerializeField] int levelWidth;
     [SerializeField] int levelHeight;
-    [SerializeField] int asteroidNumber;
     [SerializeField] bool shipDebug;
     [SerializeField] bool wallDebug;
     [SerializeField] bool enemyDebug;
     //
     Vector2 levelSize = Vector2.zero;
 
-    //**FIELDS**    
+    //**PROPERTIES**    
     public Vector2 LevelSize { get => levelSize; }
     public bool ShipDebug { get => shipDebug; set => shipDebug = value; }
     public bool WallDebug { get => wallDebug; set => wallDebug = value; }
     public bool EnemyDebug { get => enemyDebug; set => enemyDebug = value; }
 
     //**UNITY METHODS**
-    private void Awake() {
+    private void Awake()
+    {
         //Initialize
         levelSize = new Vector2(levelWidth, levelHeight);
 
@@ -36,47 +39,22 @@ public class GameManager : MonoBehaviour {
         walls[2].transform.position = new Vector3(0, 0, -levelHeight / 2f);
         walls[3].transform.position = new Vector3(-levelWidth / 2f, 0, 0);
 
-        //Place random initial asteroids
-        for (int i = 0; i < asteroidNumber; i++) {
-
-            //Setup random position
-            Vector3 spawnPosition = new Vector3(Random.Range(-levelWidth / 2f, levelWidth / 2f), 0, Random.Range(-levelHeight / 2f, levelHeight / 2f));
-            spawnPosition.x += spawnPosition.x > 0 ? -5 : 5;
-            spawnPosition.z += spawnPosition.z > 0 ? -5 : 5;
-            //Setup random rotation
-            Quaternion spawnRotation = Quaternion.Euler(0, Random.Range(0, 359f), 0);
-
-
-            //Place Gameobject
-            CreateAsteroid(spawnPosition, spawnRotation, 3, 5);
-        }
+        current = this;
     }
 
     //**UTILITY METHODS**
-    public void CreateAsteroid(Vector3 positionIn, Quaternion rotationIn, int asteroidSizeIn, float speedIn) {
 
-        for (int i = 0; i < asteroidPrefabs.Length; i++) {
-            if (asteroidSizeIn - 1 == i) {
-                //Create GameObject
-                GameObject asteroid = Instantiate(asteroidPrefabs[i], positionIn, rotationIn);
-                //Set attributes
-                AstroidController ac = asteroid.GetComponent<AstroidController>();
-                ac.Size = asteroidSizeIn;
-                ac.Speed = speedIn;
-
-                break;
-            }
-        }
-    }
     //
-    public List<Vector3> GenerateEnemyWaypoints() {
+    public List<Vector3> GenerateEnemyWaypoints()
+    {
         List<Vector3> waypoints = new List<Vector3>();
 
         //Get number of waypoints to add
         int numWaypoints = Random.Range(3, 6); //3-5 waypoints
 
         //Generate each random one
-        for (int i = 0; i < numWaypoints; i++) {
+        for (int i = 0; i < numWaypoints; i++)
+        {
             float xCoord = Random.Range(levelWidth / -2f, levelWidth / 2f + 1);
             float zCoord = Random.Range(levelHeight / -2f, levelHeight / 2f + 1);
             waypoints.Add(new Vector3(xCoord, 0, zCoord));
@@ -88,7 +66,8 @@ public class GameManager : MonoBehaviour {
         return waypoints;
     }
     //
-    public void SpawnEnemy() {
+    public void SpawnEnemy()
+    {
         //Spawn
         GameObject enemy = Instantiate(enemyPrefab, new Vector3(Random.Range(-74, levelWidth / -2f - 3), 0, Random.Range(levelHeight / 2f + 3, 74)), Quaternion.Euler(0, 0, 0));
     }

@@ -17,7 +17,7 @@ public class AstroidController : MonoBehaviour {
 
     void Awake() {
         //Cache references
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameManager.current.GetComponent<GameManager>();
     }
     //
     void Update() {
@@ -56,8 +56,7 @@ public class AstroidController : MonoBehaviour {
             }
 
             //Update player score
-            GameObject.FindWithTag("Player").GetComponent<ShipController>().UpdateScore(Size);
-
+            ShipController.current.UpdateScore(Size);
         }
     }
 
@@ -94,7 +93,7 @@ public class AstroidController : MonoBehaviour {
             newAsteroidRotations[i] = rot;
 
             //Spawn in GameObject
-            gameManager.CreateAsteroid(newAsteroidPositions[i], newAsteroidRotations[i], newSize, speed * 1.2f);
+            gameManager.asteroidSpawner.CreateAsteroid(newAsteroidPositions[i], newAsteroidRotations[i], newSize, speed * 1.2f);
         }
 
         //Debug.Break();
@@ -104,6 +103,8 @@ public class AstroidController : MonoBehaviour {
         Destroy(fx, 5f);
         Destroy(gameObject);
     }
+
+
 
 }
 

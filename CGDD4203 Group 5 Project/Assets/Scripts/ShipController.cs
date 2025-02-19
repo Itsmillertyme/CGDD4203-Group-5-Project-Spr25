@@ -55,8 +55,10 @@ public class ShipController : MonoBehaviour
     bool laserCharged = true;
     bool isInvulnerable = false;
 
-    //**FIELDS**
+    //**PROPERTIES**
     public bool IsInvulnerable { get => isInvulnerable; }
+
+    public Vector3 Velocity { get => characterController.velocity; }
 
 
     //**UNITY METHODS**

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755681021778281427}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7944669394556740953}
   - component: {fileID: 6374362662614420322}
   - component: {fileID: 6502850519854727917}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OverheadCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2954417748739552541}
   - component: {fileID: 8942919851569430854}
   - component: {fileID: 5593027170256031515}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3625168198080988148}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ProjectileSpawn 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,9 +678,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7560235712106280151, guid: 2607516d1e1c8265682316997481095c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7140371506338597877, guid: 2607516d1e1c8265682316997481095c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -3178863669818371869, guid: 2607516d1e1c8265682316997481095c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2607516d1e1c8265682316997481095c, type: 3}
       propertyPath: m_Name
       value: PlayerShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2607516d1e1c8265682316997481095c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491371865738551375, guid: 2607516d1e1c8265682316997481095c, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

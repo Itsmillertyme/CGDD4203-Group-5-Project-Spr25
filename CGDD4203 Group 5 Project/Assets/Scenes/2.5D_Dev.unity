@@ -312,6 +312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &980103066 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3625168198080988148, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
+  m_PrefabInstance: {fileID: 6906597591985937948}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1084523969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,11 +1434,11 @@ MonoBehaviour:
   - {fileID: 5630201527549435715, guid: 5230cdf87081a7b4e96fa1375a02a765, type: 3}
   - {fileID: 5630201527549435715, guid: c0978fb7b280e1a4db23a768ca6dbb2b, type: 3}
   - {fileID: 5630201527549435715, guid: 38b384e8f53302e4c9f2a7c6cb83e95e, type: 3}
-  enemyPrefab: {fileID: 0}
-  enemyProjectileParent: {fileID: 0}
+  enemyPrefab: {fileID: 6774610129193375542, guid: 2e3116bc7618c144380ebafdeae17940, type: 3}
+  enemyProjectileParent: {fileID: 624399279}
   levelWidth: 56
   levelHeight: 100
-  asteroidNumber: 0
+  asteroidNumber: 7
   classicCamera: 1
   shipDebug: 0
   wallDebug: 0
@@ -1461,7 +1466,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 807759829106107703, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 79dd04afbafbd4c4482c337039d5e0c2, type: 2}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
@@ -1517,13 +1522,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 751238887151064644, guid: 7622dc4eeb8d40142a553934b0f77a1d, type: 3}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
+      propertyPath: projectileSpawn2
+      value: 
+      objectReference: {fileID: 980103066}
+    - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: laserRechargeTime
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1704185373294602681, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 79dd04afbafbd4c4482c337039d5e0c2, type: 2}
+    - target: {fileID: 3655234902603312944, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3789465419655997497, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_Radius
       value: 1
@@ -1534,8 +1547,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_NotificationBehavior
-    - target: {fileID: 3655234902603312944, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
@@ -1600,51 +1611,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_ActionName
-      value: Player/Turn[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      value: 'Player/Turn[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_ActionName
-      value: Player/Thrust[/Keyboard/space,/XInputControllerWindows/leftTrigger]
+      value: 'Player/Thrust[/Keyboard/space,/XInputControllerWindows/leftTrigger]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_ActionName
-      value: Player/Fire[/XInputControllerWindows/rightTrigger,/Mouse/leftButton,/Keyboard/enter]
+      value: 'Player/Fire[/XInputControllerWindows/rightTrigger,/Mouse/leftButton,/Keyboard/enter]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_ActionName
-      value: Player/Interact[/Keyboard/shift,/XInputControllerWindows/buttonSouth]
+      value: 'Player/Interact[/Keyboard/shift,/XInputControllerWindows/buttonSouth]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_ActionName
-      value: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      value: 'UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_ActionName
-      value: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+      value: 'UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_ActionName
-      value: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+      value: 'UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionName
-      value: UI/Point[/Mouse/position]
+      value: 'UI/Point[/Mouse/position]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_ActionName
-      value: UI/Click[/Mouse/leftButton]
+      value: 'UI/Click[/Mouse/leftButton]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_ActionName
-      value: UI/RightClick[/Mouse/rightButton]
+      value: 'UI/RightClick[/Mouse/rightButton]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_ActionName
-      value: UI/MiddleClick[/Mouse/middleButton]
+      value: 'UI/MiddleClick[/Mouse/middleButton]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_ActionName
-      value: UI/ScrollWheel[/Mouse/scroll]
+      value: 'UI/ScrollWheel[/Mouse/scroll]'
       objectReference: {fileID: 0}
     - target: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionName
@@ -1755,10 +1766,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5083136842464888278, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5083136842464888278, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -1831,7 +1838,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8457319352893381198, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 79dd04afbafbd4c4482c337039d5e0c2, type: 2}
     - target: {fileID: 8781346666476277943, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
@@ -2083,3 +2090,4 @@ SceneRoots:
   - {fileID: 6906597591985937948}
   - {fileID: 2087258540}
   - {fileID: 1568416501}
+  - {fileID: 1771231865}

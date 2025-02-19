@@ -10,5 +10,19 @@ public class JourneyLeg : MonoBehaviour
     public SplineContainer splineContainer;
     public Collider startWaypoint;
     public Collider endWaypoint;
+
+    float elapsedTime = 0f;
+    bool timerActive = false;
+
+    public float ElapsedTime { get => elapsedTime; private set => elapsedTime = value; }
+    public bool TimerActive { get => timerActive; set => timerActive = value; }
+
+    private void Update()
+    {
+        if (TimerActive)
+        {
+            ElapsedTime += Time.deltaTime;
+        }
+    }
 }
 

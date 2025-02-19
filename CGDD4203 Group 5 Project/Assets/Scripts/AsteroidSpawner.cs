@@ -38,6 +38,7 @@ public class AsteroidSpawner : MonoBehaviour
         AstroidController ac = asteroid.GetComponent<AstroidController>();
         ac.Size = asteroidSizeIn;
         ac.Speed = speedIn;
+        ac.asteroidSpawner = this;
     }
 
 }

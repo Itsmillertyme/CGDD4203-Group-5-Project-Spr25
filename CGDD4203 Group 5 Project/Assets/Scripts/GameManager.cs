@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] asteroidPrefabs;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform enemyProjectileParent;
-    public AsteroidSpawner asteroidSpawner;
+
     //
     [Header("Game Settings")]
     [SerializeField] int levelWidth;

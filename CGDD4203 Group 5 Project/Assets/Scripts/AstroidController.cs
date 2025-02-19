@@ -6,8 +6,8 @@ public class AstroidController : MonoBehaviour {
     //**PROPERTIES**
     [SerializeField] float speed;
     int size; //1-3 atm    
-    //
-    GameManager gameManager;
+
+    public AsteroidSpawner asteroidSpawner;
 
     //**FIELDS**
     public float Speed { get => speed; set => speed = value; }
@@ -15,16 +15,12 @@ public class AstroidController : MonoBehaviour {
 
     //**UNITY METHODS**
 
-    void Awake() {
-        //Cache references
-        gameManager = GameManager.current.GetComponent<GameManager>();
-    }
-    //
+
     void Update() {
         //Move forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
-    //
+
     void OnTriggerEnter(Collider other) {
         //Test if colliding with wall trigger
         if (other.gameObject.tag == "Wall") {
@@ -92,8 +88,10 @@ public class AstroidController : MonoBehaviour {
             //Debug.Log($"New rotation: {rot.eulerAngles}");
             newAsteroidRotations[i] = rot;
 
+
+            // TODO: Individual asteroids should handle spawning their own shattered forms
             //Spawn in GameObject
-            gameManager.asteroidSpawner.CreateAsteroid(newAsteroidPositions[i], newAsteroidRotations[i], newSize, speed * 1.2f);
+            asteroidSpawner.CreateAsteroid(newAsteroidPositions[i], newAsteroidRotations[i], newSize, speed * 1.2f);
         }
 
         //Debug.Break();

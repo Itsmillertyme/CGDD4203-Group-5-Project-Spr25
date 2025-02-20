@@ -13,8 +13,9 @@ public class ShipController : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] int speedLimit;
     //
-    [Header("Movement Events")]
+    [Header("Events")]
     public UnityEvent<float> onThrust;
+    public UnityEvent onGunFired;
     [Header("Laser Settings")]
     [SerializeField] float laserRechargeTime;
     //
@@ -135,6 +136,7 @@ public class ShipController : MonoBehaviour
             playerProjectileController1.Speed = speedLimit * 2f;
             playerProjectileController.velocity += characterController.velocity;
             playerProjectileController1.velocity += characterController.velocity;
+            onGunFired.Invoke();
             print(characterController.velocity);
 
             StartCoroutine(laserRecharge());
@@ -330,14 +332,16 @@ public class ShipController : MonoBehaviour
         btn.colors = cb;
     }
 
+    public UnityEvent onHealthReduced;
     public void UpdateHealth(int amount)
     {
         if (amount < 0)
         {
             //Go invulnerable
             StartCoroutine(Invulnerability(3, 1));
-        }
+        }        
 
+            onHealthReduced.Invoke();
         stats.ApplyStatisticsMod(new ShipStatisticModifierData(-amount, 0, 0));
     }
 

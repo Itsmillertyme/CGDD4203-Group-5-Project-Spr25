@@ -1,6 +1,7 @@
 
 using UnityEngine;
 
+// TODO: Make this a generic spawner
 public class AsteroidSpawner : MonoBehaviour
 {
     [Header("References")]
@@ -8,6 +9,8 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] int maxAsteroidCount;
 
     public bool spawnOnAwake = false;
+    public float spawnRadius = 30f;
+    // TODO: Make this an Editor handle for setting the spawn area
 
     void Awake()
     {
@@ -19,14 +22,14 @@ public class AsteroidSpawner : MonoBehaviour
         //Place random initial asteroids
         for (int i = 0; i < maxAsteroidCount; i++)
         {
-            //TODO: Random position in box again
+            //TODO: Random position in box or other shape again
             Vector3 spawnPosition = (new Vector3(Random.value, 0.5f, Random.value) * 2f) - Vector3.one;
 
             //Setup random rotation
             Quaternion spawnRotation = Quaternion.Euler(0, Random.Range(0, 359f), 0);
 
             //Place Gameobject
-            CreateAsteroid(spawnPosition * maxAsteroidCount, spawnRotation, asteroidPrefabs.Length - 1, 5);
+            CreateAsteroid(transform.TransformPoint(spawnPosition * spawnRadius), spawnRotation, asteroidPrefabs.Length - 1, 5);
         }
     }
 

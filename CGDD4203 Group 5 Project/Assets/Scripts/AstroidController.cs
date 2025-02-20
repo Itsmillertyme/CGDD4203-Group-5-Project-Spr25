@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AstroidController : MonoBehaviour {
 
+    public GameObject destructionFX;
     //**PROPERTIES**
     [SerializeField] float speed;
     int size; //1-3 atm    
@@ -99,6 +100,8 @@ public class AstroidController : MonoBehaviour {
         //Debug.Break();
 
         //destroy this one
+        var fx = Instantiate(destructionFX, transform.position, transform.rotation);
+        Destroy(fx, 5f);
         Destroy(gameObject);
     }
 

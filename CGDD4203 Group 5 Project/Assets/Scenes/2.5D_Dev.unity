@@ -7739,7 +7739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2291095485578003694, guid: df0634ba40ffb90ca85272a94cf10e7d, type: 3}
       propertyPath: m_text
-      value: Asteriod Field
+      value: Asteroid Field
       objectReference: {fileID: 0}
     - target: {fileID: 2291095485578003694, guid: df0634ba40ffb90ca85272a94cf10e7d, type: 3}
       propertyPath: m_fontSize

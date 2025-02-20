@@ -7886,7 +7886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: speedLimit
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: gameManager
@@ -7902,11 +7902,11 @@ PrefabInstance:
       objectReference: {fileID: 2087258542}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: rotationSpeed
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: stats.fireRate
-      value: 0.2
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: projectileSpawn
@@ -7934,7 +7934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: stats.thrustForce
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
       propertyPath: onGunFired.m_PersistentCalls.m_Calls.Array.size

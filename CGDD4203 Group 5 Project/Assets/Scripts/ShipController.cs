@@ -189,8 +189,8 @@ public class ShipController : MonoBehaviour
 
             PlayerProjectileController playerProjectileController = projectile.GetComponent<PlayerProjectileController>();
             PlayerProjectileController playerProjectileController1 = projectile2.GetComponent<PlayerProjectileController>();
-            playerProjectileController.Speed = speedLimit * 2f;
-            playerProjectileController1.Speed = speedLimit * 2f;
+            playerProjectileController.Speed = speedLimit * 6f;
+            playerProjectileController1.Speed = speedLimit * 6f;
             playerProjectileController.velocity += characterController.velocity;
             playerProjectileController1.velocity += characterController.velocity;
             onGunFired.Invoke();

@@ -80,6 +80,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Accelerometer"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""99c61577-4589-4140-b466-b36cb01ab8f4"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -129,11 +138,33 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""25b68f87-76b2-4dc1-a953-9ea93d92193f"",
+                    ""path"": ""<Touchscreen>/touch*/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""05f6913d-c316-48b2-a6bb-e225f14c7960"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77195d33-7b8f-4499-81a8-1c89bd7b4217"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -190,6 +221,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""devSpawnEnemy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01b99cae-36c0-4fde-841a-81d0cd17067e"",
+                    ""path"": ""<Accelerometer>/acceleration"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerometer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -783,6 +825,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_devBreak = m_Player.FindAction("devBreak", throwIfNotFound: true);
         m_Player_devSpawnEnemy = m_Player.FindAction("devSpawnEnemy", throwIfNotFound: true);
+        m_Player_Accelerometer = m_Player.FindAction("Accelerometer", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -868,6 +911,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_devBreak;
     private readonly InputAction m_Player_devSpawnEnemy;
+    private readonly InputAction m_Player_Accelerometer;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -878,6 +922,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @devBreak => m_Wrapper.m_Player_devBreak;
         public InputAction @devSpawnEnemy => m_Wrapper.m_Player_devSpawnEnemy;
+        public InputAction @Accelerometer => m_Wrapper.m_Player_Accelerometer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -905,6 +950,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @devSpawnEnemy.started += instance.OnDevSpawnEnemy;
             @devSpawnEnemy.performed += instance.OnDevSpawnEnemy;
             @devSpawnEnemy.canceled += instance.OnDevSpawnEnemy;
+            @Accelerometer.started += instance.OnAccelerometer;
+            @Accelerometer.performed += instance.OnAccelerometer;
+            @Accelerometer.canceled += instance.OnAccelerometer;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -927,6 +975,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @devSpawnEnemy.started -= instance.OnDevSpawnEnemy;
             @devSpawnEnemy.performed -= instance.OnDevSpawnEnemy;
             @devSpawnEnemy.canceled -= instance.OnDevSpawnEnemy;
+            @Accelerometer.started -= instance.OnAccelerometer;
+            @Accelerometer.performed -= instance.OnAccelerometer;
+            @Accelerometer.canceled -= instance.OnAccelerometer;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1115,6 +1166,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnDevBreak(InputAction.CallbackContext context);
         void OnDevSpawnEnemy(InputAction.CallbackContext context);
+        void OnAccelerometer(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

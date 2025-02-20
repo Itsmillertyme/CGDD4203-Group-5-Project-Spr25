@@ -194,8 +194,7 @@ public class ShipController : MonoBehaviour
             playerProjectileController.velocity += characterController.velocity;
             playerProjectileController1.velocity += characterController.velocity;
             onGunFired.Invoke();
-            print(characterController.velocity);
-
+            
             StartCoroutine(laserRecharge());
             Destroy(projectile2, 5f);
             Destroy(projectile, 5f);

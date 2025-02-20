@@ -15,6 +15,7 @@ public class ShipController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float rotationSpeed;
     [SerializeField] int speedLimit;
+    [SerializeField] float autoBrakingStrength = 0.5f; // TODO: move to ship stats
     //
     [Header("Events")]
     public UnityEvent<float> onThrust;
@@ -100,7 +101,8 @@ public class ShipController : MonoBehaviour
     private (float min, float max) runningAvgThrustTiltBounds = (0.4f, .6f);
     private float lastThrustAttitudeInput = 0.5f;
     private bool lastThrustAttitudeInputResult = false;
-    void Update()
+
+    void FixedUpdate()
     {
         //DEV CODE - DELETE BEFORE FINAL BUILD
         string devOutput = "\tDEBUG - Update\n====================\n";
@@ -149,7 +151,7 @@ public class ShipController : MonoBehaviour
 
             ChangeButtonColor(btnThrust, new Color(245 / 255f, 245 / 255f, 245 / 255f));
 
-            Vector3 thrust = (transform.rotation * Vector3.forward).normalized * stats.ThrustForce * .01f;
+            Vector3 thrust = transform.rotation * Vector3.forward * stats.ThrustForce * .01f;
             currentMovement += thrust;
 
             // Particles & Other FX
@@ -160,7 +162,7 @@ public class ShipController : MonoBehaviour
         else
         {
             ChangeButtonColor(btnThrust, new Color(200 / 255f, 200 / 255f, 200 / 255f));
-
+            currentMovement -= autoBrakingStrength * characterController.velocity * Time.fixedDeltaTime;
             // Particles & Other FX
             onThrust.Invoke(0f);
             //DEV CODE - DELETE BEFORE FINAL BUILD
@@ -246,7 +248,7 @@ public class ShipController : MonoBehaviour
 
         //Lerp ship rotation
         float currentRotationY = transform.rotation.eulerAngles.y;
-        float smoothedRotationY = Mathf.LerpAngle(currentRotationY, desiredYRotation, Time.deltaTime * rotationSpeed);
+        float smoothedRotationY = Mathf.LerpAngle(currentRotationY, desiredYRotation, Time.fixedDeltaTime * rotationSpeed);
         transform.rotation = Quaternion.Euler(0, smoothedRotationY, 0);
 
         //Limit speed
@@ -401,9 +403,9 @@ public class ShipController : MonoBehaviour
         {
             //Go invulnerable
             StartCoroutine(Invulnerability(3, 1));
-        }        
+        }
 
-            onHealthReduced.Invoke();
+        onHealthReduced.Invoke();
         stats.ApplyStatisticsMod(new ShipStatisticModifierData(-amount, 0, 0));
     }
 

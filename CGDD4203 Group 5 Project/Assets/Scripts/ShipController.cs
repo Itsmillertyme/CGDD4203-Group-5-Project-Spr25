@@ -129,8 +129,14 @@ public class ShipController : MonoBehaviour
             GameObject projectile = Instantiate(projectilePrefab, spawnPosition, spawnRotation, projectileParent);
             GameObject projectile2 = Instantiate(projectilePrefab, spawnPosition2, spawnRotation, projectileParent);
 
-            projectile.GetComponent<PlayerProjectileController>().Speed = Mathf.Max(7f, characterController.velocity.magnitude * 1.2f);
-            projectile2.GetComponent<PlayerProjectileController>().Speed = Mathf.Max(7f, characterController.velocity.magnitude * 1.2f);
+            PlayerProjectileController playerProjectileController = projectile.GetComponent<PlayerProjectileController>();
+            PlayerProjectileController playerProjectileController1 = projectile2.GetComponent<PlayerProjectileController>();
+            playerProjectileController.Speed = speedLimit * 2f;
+            playerProjectileController1.Speed = speedLimit * 2f;
+            playerProjectileController.velocity += characterController.velocity;
+            playerProjectileController1.velocity += characterController.velocity;
+            print(characterController.velocity);
+
             StartCoroutine(laserRecharge());
             Destroy(projectile2, 5f);
             Destroy(projectile, 5f);

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2536981021501733539}
   - component: {fileID: 4606523354423255719}
   - component: {fileID: 298524499978906057}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Asteroid1
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
@@ -151,3 +151,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructionFX: {fileID: 8810238211996577448, guid: 74c785d87b1866c958fe7b515202d073, type: 3}
   speed: 5
+  asteroidSpawner: {fileID: 0}

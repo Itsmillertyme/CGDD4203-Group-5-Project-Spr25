@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7435464102556623111}
   - component: {fileID: 2456731830664188622}
   - component: {fileID: 385036471011684768}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerProjectile
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -61,9 +61,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &7435464102556623111
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 5237630270868947161}
   - component: {fileID: 7469293716723992949}
   - component: {fileID: 187676835853231956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 4366648000484146997}
   - component: {fileID: 1339147112316858086}
   - component: {fileID: 1182079357264056079}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

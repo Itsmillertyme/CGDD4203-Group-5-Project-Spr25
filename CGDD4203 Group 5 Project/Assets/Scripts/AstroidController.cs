@@ -16,30 +16,33 @@ public class AstroidController : MonoBehaviour {
     //**UNITY METHODS**
 
 
-    void Update() {
+    void FixedUpdate()
+    {
         //Move forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        // TODO: Boids without Alignment to simulate gravity?
     }
 
     void OnTriggerEnter(Collider other) {
-        //Test if colliding with wall trigger
-        if (other.gameObject.tag == "Wall") {
-            //Debug.Log("Asteroid wall trigger");
-            //Debug.Log($"Asteroid entering location: {transform.position}");
+        // //Test if colliding with wall trigger
+        // if (other.gameObject.tag == "Wall") {
+        //     //Debug.Log("Asteroid wall trigger");
+        //     //Debug.Log($"Asteroid entering location: {transform.position}");
 
-            //Test wall orientation
-            if (other.transform.localScale.x > other.transform.localScale.z) {
-                //Flip z coord
-                transform.position = new Vector3(transform.position.x, transform.position.y, -transform.position.z + (transform.position.z < 0 ? -0.1f : 0.1f));
-            }
-            else {
-                //Flip x coord
-                transform.position = new Vector3(-transform.position.x + (transform.position.x < 0 ? -0.1f : 0.1f), transform.position.y, transform.position.z);
-            }
-            //Debug.Log($"Asteroid flipped location: {transform.position}");
-        }
-        //Test if colliding with player projectile
-        else if (other.gameObject.tag == "PlayerProjectile") {
+        //     //Test wall orientation
+        //     if (other.transform.localScale.x > other.transform.localScale.z) {
+        //         //Flip z coord
+        //         transform.position = new Vector3(transform.position.x, transform.position.y, -transform.position.z + (transform.position.z < 0 ? -0.1f : 0.1f));
+        //     }
+        //     else {
+        //         //Flip x coord
+        //         transform.position = new Vector3(-transform.position.x + (transform.position.x < 0 ? -0.1f : 0.1f), transform.position.y, transform.position.z);
+        //     }
+        //     //Debug.Log($"Asteroid flipped location: {transform.position}");
+        // }
+        // //Test if colliding with player projectile
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerProjectile"))
+        {
             //Destroy projectile
             Destroy(other.gameObject);
 

@@ -39,6 +39,7 @@ public class ShipController : MonoBehaviour
     InputAction thrustAction;
     InputAction turnAction;
     InputAction fireAction;
+    InputAction accelAction;
     //DEV CODE - DELETE BEFORE FINAL BUILD
     InputAction breakAction;
     InputAction spawnAction;

@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class ShipController : MonoBehaviour
 {
     public static ShipController current;
+    [SerializeField] public ShipStatistics stats;
 
     //**PROPERTIES**
     [Header("Movement Settings")]
@@ -38,7 +39,6 @@ public class ShipController : MonoBehaviour
     //
     PlayerInput playerInput;
     CharacterController characterController;
-    ShipStatistics stats;
     //
     InputAction thrustAction;
     InputAction turnAction;
@@ -74,7 +74,7 @@ public class ShipController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         //Initialize Statistics (tf-3, lrt-1s, hp = 100)
-        stats = new ShipStatistics();
+        // stats = new ShipStatistics();
 
         // Initialize the input actions
         thrustAction = playerInput.actions["Thrust"];
@@ -417,7 +417,7 @@ public class ShipController : MonoBehaviour
     //**COROUTINES**
     IEnumerator laserRecharge()
     {
-        yield return new WaitForSeconds(0.05f); // TODO: Bring back constant
+        yield return new WaitForSeconds(stats.FireRate);
         laserCharged = true;
     }
 

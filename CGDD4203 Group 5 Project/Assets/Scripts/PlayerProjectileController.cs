@@ -2,17 +2,32 @@ using System.Collections;
 using UnityEngine;
 
 public class PlayerProjectileController : MonoBehaviour {
-    //**PROPERTIES**
-    float speed;
+    //**FIELDS**
+    float speed = 0.0f;
+    public Vector3 velocity;
     //
     bool inTrigger = false;
 
-    public float Speed { get => speed; set => speed = value; }
+    public float Speed
+    {
+        get => speed; set
+        {
+            if (Mathf.Abs(velocity.sqrMagnitude) > 0)
+            {
+                Debug.LogWarning("Setting speed after init will add to the velocity");
+            }
+            speed = value;
+            velocity += transform.forward * speed;
+        }
+    }
+
 
     //**UNITY METHODS**
-    void Update() {
+    void FixedUpdate()
+    {
         //Move forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        transform.position += velocity * Time.fixedDeltaTime;
     }
     //
     private void OnTriggerEnter(Collider other) {

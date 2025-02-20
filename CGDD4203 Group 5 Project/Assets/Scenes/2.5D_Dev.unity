@@ -227,7 +227,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1335510752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &135991697 stripped
+=======
+--- !u!114 &619411023 stripped
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 134705140746297466, guid: 358c1594da0f25b44b8c306810e41ff8, type: 3}
   m_PrefabInstance: {fileID: 7364245529875482180}
@@ -1266,7 +1270,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1164586172456290617, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
   m_PrefabInstance: {fileID: 6906597591985937948}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604902981}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc18cf329f5f97540b28f73d2c65bbcb, type: 3}
@@ -1439,7 +1443,11 @@ MonoBehaviour:
   levelWidth: 56
   levelHeight: 100
   asteroidNumber: 7
+<<<<<<< Updated upstream
   classicCamera: 1
+=======
+  classicCamera: 0
+>>>>>>> Stashed changes
   shipDebug: 0
   wallDebug: 0
   enemyDebug: 0
@@ -1854,6 +1862,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
+--- !u!114 &6906597591985937949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5024978659734651207, guid: 65a7ce24a72b87f499ca4ed0da1e4a65, type: 3}
+  m_PrefabInstance: {fileID: 6906597591985937948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7364245529875482180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1862,6 +1881,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1348688745}
     m_Modifications:
+<<<<<<< Updated upstream
     - target: {fileID: 254376318931660057, guid: 358c1594da0f25b44b8c306810e41ff8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1875,6 +1895,33 @@ PrefabInstance:
       value: 25.844
       objectReference: {fileID: 0}
     - target: {fileID: 1722442261074227714, guid: 358c1594da0f25b44b8c306810e41ff8, type: 3}
+=======
+    - target: {fileID: 254376318931660057, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 254376318931660057, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6906597591985937949}
+    - target: {fileID: 254376318931660057, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_actions
+      objectReference: {fileID: 0}
+    - target: {fileID: 254376318931660057, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 254376318931660057, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 254376318931660057, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.InputSystem.InputActionAsset, Unity.InputSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722442261074227714, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+>>>>>>> Stashed changes
       propertyPath: m_Pivot.x
       value: 0
       objectReference: {fileID: 0}
@@ -1954,6 +2001,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 1756238256676704742, guid: 358c1594da0f25b44b8c306810e41ff8, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
@@ -1979,6 +2027,21 @@ PrefabInstance:
       value: 395
       objectReference: {fileID: 0}
     - target: {fileID: 5064312223110103331, guid: 358c1594da0f25b44b8c306810e41ff8, type: 3}
+=======
+    - target: {fileID: 1856794716018729254, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856794716018729254, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856794716018729254, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813235367429865197, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+>>>>>>> Stashed changes
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 74ae65166580ec146b3fc915eeec60a0, type: 2}

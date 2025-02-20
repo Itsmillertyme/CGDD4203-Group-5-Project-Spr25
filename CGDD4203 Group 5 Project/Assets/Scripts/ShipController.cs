@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -39,6 +40,7 @@ public class ShipController : MonoBehaviour
     InputAction thrustAction;
     InputAction turnAction;
     InputAction fireAction;
+    InputAction accelAction;
     //DEV CODE - DELETE BEFORE FINAL BUILD
     InputAction breakAction;
     InputAction spawnAction;
@@ -72,14 +74,33 @@ public class ShipController : MonoBehaviour
         //DEV CODE - DELETE BEFORE FINAL BUILD
         breakAction = playerInput.actions["devBreak"];
         spawnAction = playerInput.actions["devSpawnEnemy"];
+        accelAction = playerInput.actions["Accelerometer"];
+
+
+        if (UnityEngine.InputSystem.Gyroscope.current != null)
+        {
+            InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
+        }
+        if (AttitudeSensor.current != null)
+        {
+            InputSystem.EnableDevice(AttitudeSensor.current);
+        }
+
     }
     //
+
+    private (float min, float max) runningAvgThrustTiltBounds = (0.4f, .6f);
+    private float lastThrustAttitudeInput = 0.5f;
+    private bool lastThrustAttitudeInputResult = false;
     void Update()
     {
         //DEV CODE - DELETE BEFORE FINAL BUILD
         string devOutput = "\tDEBUG - Update\n====================\n";
         devOutput += $"Inside trigger? {inTrigger}\n";
-
+        // print(UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue());
+        // if (AttitudeSensor.current != null)
+        //     print(AttitudeSensor.current.attitude.ReadValue());
+        // print(accelAction.ReadValue<Vector3>());
 
         devOutput += $"Health: {stats.ShieldPower / (float)stats.ShieldPowerMax}\n";
 
@@ -89,7 +110,33 @@ public class ShipController : MonoBehaviour
 
         //*Input Handling*
         //Thrust
-        if (thrustAction.ReadValue<float>() != 0)
+        float thrustInput = thrustAction.ReadValue<float>();
+        if (AttitudeSensor.current != null)
+        {
+            float thrustAttitudeInput = Mathf.Clamp01(Vector3.Dot(AttitudeSensor.current.attitude.ReadValue() * Vector3.forward, Vector3.forward));
+
+            // TODO: Remind me to clean this up this later...
+            // if (thrustAttitudeInput > runningAvgThrustTiltBounds.max + 0.3f)
+            // {
+            //     runningAvgThrustTiltBounds.max = Mathf.Lerp(thrustAttitudeInput, runningAvgThrustTiltBounds.max, 1 - Mathf.Exp(-10f * Time.fixedDeltaTime));
+            //     runningAvgThrustTiltBounds.max = Mathf.Min(runningAvgThrustTiltBounds.min + 0.3f, runningAvgThrustTiltBounds.max);
+            // }
+            // if (thrustAttitudeInput < runningAvgThrustTiltBounds.min - 0.3f)
+            // {
+            //     runningAvgThrustTiltBounds.min = Mathf.Lerp(thrustAttitudeInput, runningAvgThrustTiltBounds.min, 1 - Mathf.Exp(-10f * Time.fixedDeltaTime));
+            //     runningAvgThrustTiltBounds.min = Mathf.Max(runningAvgThrustTiltBounds.max - 0.3f, runningAvgThrustTiltBounds.min);
+            // }
+            // float center = (runningAvgThrustTiltBounds.min + runningAvgThrustTiltBounds.max) / 2;
+            float center = 0.75f;
+            bool debounce = Mathf.Abs(thrustAttitudeInput - lastThrustAttitudeInput) < 0.1f;
+            bool attInputResult = debounce ? (thrustAttitudeInput > center) : lastThrustAttitudeInputResult;
+            thrustInput += attInputResult ? 1f : 0f;
+            // print($"thrustAttitudeInput: {thrustAttitudeInput}, runningAvgThrustTiltBounds.min: {runningAvgThrustTiltBounds.min} max {runningAvgThrustTiltBounds.max} center {center}");
+            lastThrustAttitudeInput = thrustAttitudeInput;
+            lastThrustAttitudeInputResult = attInputResult;
+        }
+
+        if (thrustInput != 0)
         {
 
             ChangeButtonColor(btnThrust, new Color(245 / 255f, 245 / 255f, 245 / 255f));
@@ -155,16 +202,23 @@ public class ShipController : MonoBehaviour
         //
         //Turn      
 
-        float input = turnAction.ReadValue<float>();
+        float turnInput = turnAction.ReadValue<float>();
 
-        if (input < 0)
+        if (AttitudeSensor.current != null)
+        {
+            float turnAttitudeInput = Vector3.Dot(AttitudeSensor.current.attitude.ReadValue() * Vector3.up, Vector3.up);
+            if (Mathf.Abs(turnAttitudeInput) < 0.2f) { turnAttitudeInput = 0; } // Deadzone
+            // print($"turnAttitudeInput: {turnAttitudeInput}");
+            turnInput += turnAttitudeInput * turnAttitudeInput * Mathf.Sign(turnAttitudeInput); // Curve input
+        }
+        if (turnInput < 0)
         {
             //Turn on button
             ChangeButtonColor(btnLTurn, new Color(245 / 255f, 245 / 255f, 245 / 255f));
             //Turn off button
             ChangeButtonColor(btnRTurn, new Color(200 / 255f, 200 / 255f, 200 / 255f));
         }
-        else if (input > 0)
+        else if (turnInput > 0)
         {
             //Turn on button
             ChangeButtonColor(btnRTurn, new Color(245 / 255f, 245 / 255f, 245 / 255f));
@@ -178,7 +232,7 @@ public class ShipController : MonoBehaviour
             ChangeButtonColor(btnRTurn, new Color(200 / 255f, 200 / 255f, 200 / 255f));
         }
 
-        desiredYRotation += input * rotationSpeed * 10 * Time.deltaTime;
+        desiredYRotation += turnInput * rotationSpeed * 10 * Time.deltaTime;
         //DEV CODE - DELETE BEFORE FINAL BUILD
         devOutput += $"Turn Input: {turnAction.ReadValue<float>()}\n";
 

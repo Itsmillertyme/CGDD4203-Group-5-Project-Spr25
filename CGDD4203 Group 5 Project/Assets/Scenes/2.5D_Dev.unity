@@ -8420,6 +8420,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1914776771406817761, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914776771406817761, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914776771406817761, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914776771406817761, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914776771406817761, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914776771406817761, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4813235367429865197, guid: 63587f4607658ef489c23f2381052a95, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -8435,6 +8459,10 @@ PrefabInstance:
     - target: {fileID: 5746811486732831283, guid: 63587f4607658ef489c23f2381052a95, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746811486732831283, guid: 63587f4607658ef489c23f2381052a95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6257838711970470069, guid: 63587f4607658ef489c23f2381052a95, type: 3}
       propertyPath: m_sharedMaterial

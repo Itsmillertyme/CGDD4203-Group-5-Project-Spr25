@@ -328,7 +328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -140}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &7568810211630472139
@@ -512,6 +512,7 @@ MonoBehaviour:
   OnPopupHidden:
     m_PersistentCalls:
       m_Calls: []
+  secondsToShowFor: 5
   ui: {fileID: 7716881467700439293}
 --- !u!65 &1389256473061727281
 BoxCollider:

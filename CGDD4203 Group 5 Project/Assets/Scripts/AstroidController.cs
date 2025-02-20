@@ -19,7 +19,7 @@ public class AstroidController : MonoBehaviour {
     void FixedUpdate()
     {
         //Move forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime);
         // TODO: Boids without Alignment to simulate gravity?
     }
 

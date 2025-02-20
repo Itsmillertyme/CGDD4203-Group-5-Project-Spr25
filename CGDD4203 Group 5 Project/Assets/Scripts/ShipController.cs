@@ -9,10 +9,14 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CharacterController))]
 public class ShipController : MonoBehaviour
 {
+    public static ShipController current;
+    [SerializeField] public ShipStatistics stats;
+
     //**PROPERTIES**
     [Header("Movement Settings")]
     [SerializeField] float rotationSpeed;
     [SerializeField] int speedLimit;
+    [SerializeField] float autoBrakingStrength = 0.5f; // TODO: move to ship stats
     //
     [Header("Events")]
     public UnityEvent<float> onThrust;
@@ -35,7 +39,6 @@ public class ShipController : MonoBehaviour
     //
     PlayerInput playerInput;
     CharacterController characterController;
-    ShipStatistics stats;
     //
     InputAction thrustAction;
     InputAction turnAction;
@@ -53,11 +56,17 @@ public class ShipController : MonoBehaviour
     bool laserCharged = true;
     bool isInvulnerable = false;
 
-    //**FIELDS**
+    //**PROPERTIES**
     public bool IsInvulnerable { get => isInvulnerable; }
+
+    public Vector3 Velocity { get => characterController.velocity; }
 
 
     //**UNITY METHODS**
+    void OnEnable()
+    {
+        current = this;
+    }
     void Awake()
     {
         // Cache references
@@ -65,7 +74,7 @@ public class ShipController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         //Initialize Statistics (tf-3, lrt-1s, hp = 100)
-        stats = new ShipStatistics();
+        // stats = new ShipStatistics();
 
         // Initialize the input actions
         thrustAction = playerInput.actions["Thrust"];
@@ -92,7 +101,8 @@ public class ShipController : MonoBehaviour
     private (float min, float max) runningAvgThrustTiltBounds = (0.4f, .6f);
     private float lastThrustAttitudeInput = 0.5f;
     private bool lastThrustAttitudeInputResult = false;
-    void Update()
+
+    void FixedUpdate()
     {
         //DEV CODE - DELETE BEFORE FINAL BUILD
         string devOutput = "\tDEBUG - Update\n====================\n";
@@ -141,7 +151,7 @@ public class ShipController : MonoBehaviour
 
             ChangeButtonColor(btnThrust, new Color(245 / 255f, 245 / 255f, 245 / 255f));
 
-            Vector3 thrust = (transform.rotation * Vector3.forward).normalized * stats.ThrustForce * .01f;
+            Vector3 thrust = transform.rotation * Vector3.forward * stats.ThrustForce * .01f;
             currentMovement += thrust;
 
             // Particles & Other FX
@@ -152,7 +162,7 @@ public class ShipController : MonoBehaviour
         else
         {
             ChangeButtonColor(btnThrust, new Color(200 / 255f, 200 / 255f, 200 / 255f));
-
+            currentMovement -= autoBrakingStrength * characterController.velocity * Time.fixedDeltaTime;
             // Particles & Other FX
             onThrust.Invoke(0f);
             //DEV CODE - DELETE BEFORE FINAL BUILD
@@ -184,8 +194,7 @@ public class ShipController : MonoBehaviour
             playerProjectileController.velocity += characterController.velocity;
             playerProjectileController1.velocity += characterController.velocity;
             onGunFired.Invoke();
-            print(characterController.velocity);
-
+            
             StartCoroutine(laserRecharge());
             Destroy(projectile2, 5f);
             Destroy(projectile, 5f);
@@ -238,7 +247,7 @@ public class ShipController : MonoBehaviour
 
         //Lerp ship rotation
         float currentRotationY = transform.rotation.eulerAngles.y;
-        float smoothedRotationY = Mathf.LerpAngle(currentRotationY, desiredYRotation, Time.deltaTime * rotationSpeed);
+        float smoothedRotationY = Mathf.LerpAngle(currentRotationY, desiredYRotation, Time.fixedDeltaTime * rotationSpeed);
         transform.rotation = Quaternion.Euler(0, smoothedRotationY, 0);
 
         //Limit speed
@@ -393,9 +402,9 @@ public class ShipController : MonoBehaviour
         {
             //Go invulnerable
             StartCoroutine(Invulnerability(3, 1));
-        }        
+        }
 
-            onHealthReduced.Invoke();
+        onHealthReduced.Invoke();
         stats.ApplyStatisticsMod(new ShipStatisticModifierData(-amount, 0, 0));
     }
 
@@ -407,7 +416,7 @@ public class ShipController : MonoBehaviour
     //**COROUTINES**
     IEnumerator laserRecharge()
     {
-        yield return new WaitForSeconds(0.05f); // TODO: Bring back constant
+        yield return new WaitForSeconds(stats.FireRate);
         laserCharged = true;
     }
 

@@ -6,8 +6,8 @@ public class AstroidController : MonoBehaviour {
     //**PROPERTIES**
     [SerializeField] float speed;
     int size; //1-3 atm    
-    //
-    GameManager gameManager;
+
+    public AsteroidSpawner asteroidSpawner;
 
     //**FIELDS**
     public float Speed { get => speed; set => speed = value; }
@@ -15,35 +15,34 @@ public class AstroidController : MonoBehaviour {
 
     //**UNITY METHODS**
 
-    void Awake() {
-        //Cache references
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-    //
-    void Update() {
-        //Move forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-    //
-    void OnTriggerEnter(Collider other) {
-        //Test if colliding with wall trigger
-        if (other.gameObject.tag == "Wall") {
-            //Debug.Log("Asteroid wall trigger");
-            //Debug.Log($"Asteroid entering location: {transform.position}");
 
-            //Test wall orientation
-            if (other.transform.localScale.x > other.transform.localScale.z) {
-                //Flip z coord
-                transform.position = new Vector3(transform.position.x, transform.position.y, -transform.position.z + (transform.position.z < 0 ? -0.1f : 0.1f));
-            }
-            else {
-                //Flip x coord
-                transform.position = new Vector3(-transform.position.x + (transform.position.x < 0 ? -0.1f : 0.1f), transform.position.y, transform.position.z);
-            }
-            //Debug.Log($"Asteroid flipped location: {transform.position}");
-        }
-        //Test if colliding with player projectile
-        else if (other.gameObject.tag == "PlayerProjectile") {
+    void FixedUpdate()
+    {
+        //Move forward
+        transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime);
+        // TODO: Boids without Alignment to simulate gravity?
+    }
+
+    void OnTriggerEnter(Collider other) {
+        // //Test if colliding with wall trigger
+        // if (other.gameObject.tag == "Wall") {
+        //     //Debug.Log("Asteroid wall trigger");
+        //     //Debug.Log($"Asteroid entering location: {transform.position}");
+
+        //     //Test wall orientation
+        //     if (other.transform.localScale.x > other.transform.localScale.z) {
+        //         //Flip z coord
+        //         transform.position = new Vector3(transform.position.x, transform.position.y, -transform.position.z + (transform.position.z < 0 ? -0.1f : 0.1f));
+        //     }
+        //     else {
+        //         //Flip x coord
+        //         transform.position = new Vector3(-transform.position.x + (transform.position.x < 0 ? -0.1f : 0.1f), transform.position.y, transform.position.z);
+        //     }
+        //     //Debug.Log($"Asteroid flipped location: {transform.position}");
+        // }
+        // //Test if colliding with player projectile
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerProjectile"))
+        {
             //Destroy projectile
             Destroy(other.gameObject);
 
@@ -56,8 +55,7 @@ public class AstroidController : MonoBehaviour {
             }
 
             //Update player score
-            GameObject.FindWithTag("Player").GetComponent<ShipController>().UpdateScore(Size);
-
+            ShipController.current.UpdateScore(Size);
         }
     }
 
@@ -93,8 +91,10 @@ public class AstroidController : MonoBehaviour {
             //Debug.Log($"New rotation: {rot.eulerAngles}");
             newAsteroidRotations[i] = rot;
 
+
+            // TODO: Individual asteroids should handle spawning their own shattered forms
             //Spawn in GameObject
-            gameManager.CreateAsteroid(newAsteroidPositions[i], newAsteroidRotations[i], newSize, speed * 1.2f);
+            asteroidSpawner.CreateAsteroid(newAsteroidPositions[i], newAsteroidRotations[i], newSize, speed * 1.2f);
         }
 
         //Debug.Break();
@@ -104,6 +104,8 @@ public class AstroidController : MonoBehaviour {
         Destroy(fx, 5f);
         Destroy(gameObject);
     }
+
+
 
 }
 

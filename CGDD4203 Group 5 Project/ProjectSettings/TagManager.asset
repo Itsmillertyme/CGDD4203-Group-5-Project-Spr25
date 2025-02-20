@@ -11,13 +11,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - PlayerDetector
+  - PlayerProjectile
+  - EnemyProjectile
+  - Asteroids
   - 
   - 
   - 

@@ -1,13 +1,8 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class ShipStatistics {
-
-    //**PROPERTIES**
-    //Statistics
-    int shieldPower; //0-100
-    float fireRate; //seconds of cool down between shots
-    int thrustForce; //3-10?
-
 
     //Caps
     int shieldPowerMin;
@@ -17,11 +12,17 @@ public class ShipStatistics {
     int thrustForceMin;
     int thrustForceMax;
 
-    //**FIELDS**
-    public int ShieldPower { get => shieldPower; }
-    public float FireRate { get => fireRate; }
-    public int ThrustForce { get => thrustForce; }
-    public int ShieldPowerMax { get => shieldPowerMax; set => shieldPowerMax = value; }
+
+    //Statistics
+    [SerializeField] private int shieldPower;
+    [SerializeField] private float fireRate;
+    [SerializeField] private float thrustForce;
+    [SerializeField] private int shieldPowerMax1;
+
+    public int ShieldPower { get => shieldPower; protected set => System.Math.Clamp(value, 0, ShieldPowerMax); }  //0-100
+    public float FireRate { get => fireRate; protected set => fireRate = value; } //seconds of cool down between shots
+    public float ThrustForce { get => thrustForce; protected set => thrustForce = value; } //3-10?
+    public int ShieldPowerMax { get => shieldPowerMax1; protected set => shieldPowerMax1 = value; }
 
     //**CONSTRUCTOR**
     public ShipStatistics() {
@@ -35,25 +36,25 @@ public class ShipStatistics {
         thrustForceMax = 10; //?
 
         //Initialize statistics
-        shieldPower = shieldPowerMax; //full shields
-        fireRate = fireRateMax; //slowest fire rate
-        thrustForce = thrustForceMin; //Min thrust force
+        ShieldPower = shieldPowerMax; //full shields
+        FireRate = fireRateMax; //slowest fire rate
+        ThrustForce = thrustForceMin; //Min thrust force
     }
 
     //**UTILITY METHODS**
     public void ApplyStatisticsMod(ShipStatisticModifierData newStatModData) {
-        shieldPower = Mathf.Clamp(shieldPower + newStatModData.ShieldPowerMod, shieldPowerMin, shieldPowerMax);
-        fireRate = Mathf.Clamp(fireRate + newStatModData.FireRateMod, fireRateMin, fireRateMax);
-        thrustForce = Mathf.Clamp(thrustForce + newStatModData.ThrustForceMod, thrustForceMin, thrustForceMax);
+        ShieldPower = Mathf.Clamp(ShieldPower + newStatModData.ShieldPowerMod, shieldPowerMin, shieldPowerMax);
+        FireRate = Mathf.Clamp(FireRate + newStatModData.FireRateMod, fireRateMin, fireRateMax);
+        ThrustForce = Mathf.Clamp(ThrustForce + newStatModData.ThrustForceMod, thrustForceMin, thrustForceMax);
     }
 
     public override string ToString() {
-        return $"Shield Power: {shieldPower}/{shieldPowerMax} | Fire Rate: {fireRate}s | ThrustForce: {ThrustForce}";
+        return $"Shield Power: {ShieldPower}/{shieldPowerMax} | Fire Rate: {FireRate}s | ThrustForce: {ThrustForce}";
     }
 }
 
 
-
+[Serializable]
 public struct ShipStatisticModifierData {
     //**PROPERTIES**
     int shieldPowerMod;

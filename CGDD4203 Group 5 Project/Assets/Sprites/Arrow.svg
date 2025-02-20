@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256"
+   height="257"
+   viewBox="0 0 67.733332 67.997916"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="Arrow.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="2.132702"
+     inkscape:cx="151.68551"
+     inkscape:cy="221.31549"
+     inkscape:window-width="2540"
+     inkscape:window-height="1361"
+     inkscape:window-x="8"
+     inkscape:window-y="8"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path1"
+       style="opacity:1;fill:#000000;fill-opacity:0.19366434;stroke:#ffffff;stroke-width:2.117;stroke-linecap:round;stroke-linejoin:miter;paint-order:fill markers stroke;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:transform-center-y="-9.2449786"
+       transform="translate(18.235087,27.116065)"
+       d="M 47.657126,34.617777 15.63158,13.527639 -16.393967,34.617777 15.63158,-20.852097 Z"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>
